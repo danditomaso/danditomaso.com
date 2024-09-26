@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
-import { allProjects } from "contentlayer/generated";
-import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
 import { RedisClient } from "@/service/redis";
+import { allProjects } from "@/.content-collections/generated";
+import { MDX } from "@/app/components/mdx-content";
 
 export const revalidate = 60;
 
@@ -35,15 +35,13 @@ export default async function PostPage({ params }: Props) {
   const views =
     (await redis.get<number>(["pageviews", "projects", slug])) ?? 0;
 
-
-
   return (
     <div className="bg-white min-h-screen">
       <Header project={project} views={views} />
-      <ReportView slug={project.slug} />
+      {/* <ReportView slug={project.slug ?? ""} /> */}
 
       <article className="px-4 py-12 mx-auto prose prose-slate prose-quoteless">
-        <Mdx code={project.body.code} />
+        <MDX code={project.mdx} />
       </article>
     </div>
   );

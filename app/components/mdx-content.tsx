@@ -2,13 +2,11 @@
 import type * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import clsx from 'clsx';
+import { useMDXComponent } from "@content-collections/mdx/react";
+import type { ImageProps } from "next/image";
 
-function clsx(...args: unknown) {
-	return args.filter(Boolean).join(" ");
-}
-
-const components = {
+const MdxComponents = {
 	h1: ({ className, ...props }) => (
 		<h1
 			className={clsx(
@@ -164,16 +162,17 @@ const components = {
 	Image,
 };
 
-interface MdxProps {
+interface MDXProps {
 	code: string;
 }
 
-export function Mdx({ code }: MdxProps) {
+export function MDX({ code }: MDXProps) {
 	const Component = useMDXComponent(code);
-
 	return (
-		<div className="mdx">
-			<Component components={components} />
-		</div>
+		<Component
+			components={{
+				...MdxComponents,
+			}}
+		/>
 	);
 }

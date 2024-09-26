@@ -1,6 +1,6 @@
 import Link from "@/app/components/link";
 import React from "react";
-import { allProjects } from "contentlayer/generated";
+import { allProjects } from "content-collections";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
