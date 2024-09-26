@@ -2,7 +2,6 @@
 
 export function Analytics() {
 	const token = process.env.NEXT_PUBLIC_BEAM_TOKEN;
-	console.log('token', token);
 
 	if (!token) {
 		return null;
