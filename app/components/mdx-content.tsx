@@ -94,6 +94,22 @@ const MdxComponents = {
 			{...props}
 		/>
 	),
+	Image: (props: ImageProps) =>
+		props.width || props.fill ? (
+			<Image
+				{...props}
+				placeholder="blur"
+				blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+e1bKQAJMQNc5W2CQwAAAABJRU5ErkJggg=="
+			/>
+		) : (
+			<Image
+				{...props}
+				placeholder="blur"
+				width={1920}
+				height={1080}
+				blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+e1bKQAJMQNc5W2CQwAAAABJRU5ErkJggg=="
+			/>
+		),
 	img: ({
 		className,
 		alt,
@@ -153,13 +169,12 @@ const MdxComponents = {
 	code: ({ className, ...props }) => (
 		<code
 			className={clsx(
-				"relative rounded border bg-slate-300 bg-opacity-25 py-[0.2rem] px-[0.3rem] font-mono text-sm text-slate-600",
+				"relative rounded bg-opacity-25 py-[0.2rem] px-[0.3rem] font-mono text-sm text-slate-200",
 				className,
 			)}
 			{...props}
 		/>
 	),
-	Image,
 };
 
 interface MDXProps {
