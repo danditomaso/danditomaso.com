@@ -13,7 +13,6 @@
     "@content-collections/core": "^0.7.1",
     "@content-collections/mdx": "^0.1.5",
     "@content-collections/next": "^0.2.2",
-    "@next/font": "^14.2.13",
     "@upstash/redis": "^1.34.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.7.0",
