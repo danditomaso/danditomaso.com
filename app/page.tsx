@@ -30,24 +30,25 @@ function Navigation() {
 
 function Header() {
   return (
-    <header className="flex flex-col gap-6 mt-[20%] my-6 lg:my-16 mx-16">
+    <header className="flex flex-col mt-[20%] my-6 lg:my-16 mx-16">
       <h1 className="py-1 px-0.5 z-10 text-md tracking-[2px] uppercase font-light text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-sans whitespace-nowrap bg-clip-text">
         Dan Ditomaso
       </h1>
 
-      <div className="animate-fade-in space-y-3 tracking-widerest lg:max-w-[38ch] text-balance">
-        <h2 className="text-sm tracking-widerest text-slate-200">
-          Frontend Developer
+      <div className="animate-fade-in mt-3 tracking-widerest lg:max-w-[38ch] text-balance">
+        <h2 className="text-md tracking-widerest text-white">
+          Full Stack Developer
         </h2>
-        <h3 className="text-sm text-slate-200 tracking-widest">
-          Building{" "}
+        <h3 className="text-md font-light leading-normal mt-4 text-slate-400 tracking-widest">
+          I'm a developer with a{" "}
           <Link
             target="_blank"
             href="/projects"
             className="underline"
           >
-            pixel-perfect
-          </Link> , engaging, and delightful user experiences.
+            focus
+          </Link> building on pixel-perfect, engaging, and delightful front-end experiences.
+
         </h3>
       </div>
     </header>
