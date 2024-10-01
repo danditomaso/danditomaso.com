@@ -10,15 +10,17 @@ class RedisClient {
 
   // Method to set a key-value pair with optional expiry
   async set<TData>(
-    key: string,
+    key: string[],
     value: TData,
     opts?: SetCommandOptions,
   ): Promise<"OK" | TData | null> {
 
+    const _key = key.join(":");
+
     if (opts) {
-      return this.client.set(key, value, opts);
+      return this.client.set(_key, value, opts);
     }
-    return this.client.set(key, value);
+    return this.client.set(_key, value);
   }
 
   async incr(

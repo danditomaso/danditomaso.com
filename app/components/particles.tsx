@@ -47,7 +47,7 @@ export default function Particles({
 
 	useEffect(() => {
 		initCanvas();
-	}, []);
+	}, [refresh]);
 
 	const initCanvas = () => {
 		resizeCanvas();

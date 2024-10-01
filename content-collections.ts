@@ -1,6 +1,6 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
-import { remarkGfm, remarkHeading, rehypeCode, remarkStructure } from "fumadocs-core/mdx-plugins";
+import { remarkGfm, remarkHeading, remarkStructure } from "fumadocs-core/mdx-plugins";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";

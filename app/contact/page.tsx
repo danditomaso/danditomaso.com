@@ -1,32 +1,30 @@
-"use client";
-import { Github, Mail, TwitterIcon } from "lucide-react";
-// import Link from "next/link";
+import { FaTwitter, FaGithub, FaEnvelope } from 'react-icons/fa';
 import Link from "@/app/components/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 
 const socials = [
 	{
-		icon: <TwitterIcon size={20} />,
+		icon: <FaTwitter size={20} />,
 		href: "https://twitter.com/danditomaso",
 		label: "Twitter",
 		handle: "@danditomaso",
 	},
 	{
-		icon: <Mail size={20} />,
+		icon: <FaEnvelope size={20} />,
 		href: "mailto:hi@danditomaso.com?subject=Inquiry From Website",
 		label: "Email",
 		handle: "hi@danditomaso.com",
 	},
 	{
-		icon: <Github size={20} />,
+		icon: <FaGithub size={20} />,
 		href: "https://github.com/danditomaso",
 		label: "Github",
 		handle: "danditomaso",
 	},
 ];
 
-export default function ContactPag() {
+export default async function ContactPage() {
 	return (
 		<div className="bg-gradient-to-tl from-slate-900/0 via-slate-900 to-slate-900/0">
 			<Navigation />
@@ -50,7 +48,7 @@ export default function ContactPag() {
 									<span className="lg:text-xl font-medium duration-150 xl:text-3xl text-slate-200 group-hover:text-white font-display">
 										{s.handle}
 									</span>
-									<span className="mt-4 text-sm text-center duration-1000 text-slate-400 group-hover:text-slate-200">
+									<span className="mt-4 text-md text-center duration-1000 text-slate-400 group-hover:text-slate-200">
 										{s.label}
 									</span>
 								</div>

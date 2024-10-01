@@ -1,15 +1,17 @@
 "use client";
-import { ArrowLeft } from "lucide-react";
 import Link from "@/app/components/link";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { HiArrowLeft } from "react-icons/hi";
 
 export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
 	useEffect(() => {
-		if (!ref.current) return;
+		if (!ref.current) {
+			return;
+		}
 		const observer = new IntersectionObserver(([entry]) =>
 			setIntersecting(entry.isIntersecting),
 		);
@@ -43,7 +45,7 @@ export const Navigation: React.FC = () => {
 					<Link
 						href="/"
 					>
-						<ArrowLeft className="w-6 h-6" />
+						<HiArrowLeft className="size-5" />
 					</Link>
 				</div>
 			</div>

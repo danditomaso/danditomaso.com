@@ -1,6 +1,7 @@
-import type { Project } from "@/.contentlayer/generated";
+import type { Project } from "content-collections";
 import Link from "@/app/components/link";
-import { Eye, View } from "lucide-react";
+import { HiOutlineEye } from "react-icons/hi";
+import { TechList } from "../components/tech-list";
 
 type Props = {
 	project: Project;
@@ -11,8 +12,8 @@ export const Article: React.FC<Props> = ({ project, views }) => {
 	return (
 		<Link href={`/projects/${project.slug}`}>
 			<article className="p-4 md:p-8">
-				<div className="flex justify-between gap-2 items-center">
-					<span className="text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200 drop-shadow-orange">
+				<div className="flex justify-between gap-3 items-center">
+					<span className="text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200">
 						{project.date ? (
 							<time dateTime={new Date(project.date).toISOString()}>
 								{Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
@@ -23,8 +24,8 @@ export const Article: React.FC<Props> = ({ project, views }) => {
 							<span>COMING SOON</span>
 						)}
 					</span>
-					<span className="text-slate-200 text-xs  flex items-center gap-1">
-						<Eye className="w-4 h-4" />{" "}
+					<span className="text-slate-200 text-xs flex items-center gap-2">
+						<HiOutlineEye className="size-5" />{" "}
 						{Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
 					</span>
 				</div>
@@ -34,6 +35,9 @@ export const Article: React.FC<Props> = ({ project, views }) => {
 				<p className="z-20 mt-4 text-sm  duration-1000 text-slate-400 group-hover:text-slate-200">
 					{project.description}
 				</p>
+				<div className="mt-4">
+					<TechList techUsed={project.tech} />
+				</div>
 			</article>
 		</Link>
 	);

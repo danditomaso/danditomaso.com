@@ -1,8 +1,9 @@
 "use client";
-import { ArrowLeft, Eye, Github, Twitter } from "lucide-react";
 import Link from "@/app/components/link";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { FaGithub, FaTwitter } from "react-icons/fa";
+import { HiArrowLeft, HiArrowRight, HiOutlineEye } from "react-icons/hi";
 
 type Props = {
 	project: {
@@ -32,7 +33,9 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 		});
 	}
 	useEffect(() => {
-		if (!ref.current) return;
+		if (!ref.current) {
+			return;
+		}
 		const observer = new IntersectionObserver(([entry]) =>
 			setIntersecting(entry.isIntersecting),
 		);
@@ -61,22 +64,22 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 								: "text-slate-600 hover:text-slate-900"
 								} `}
 						>
-							<Eye className="w-5 h-5" />{" "}
+							<HiOutlineEye className="w-5 h-5" />{" "}
 							{Intl.NumberFormat("en-US", { notation: "compact" }).format(
 								views,
 							)}
 						</span>
 						<Link target="_blank" href="https://twitter.com/danditomaso">
-							<Twitter
-								className={`w-6 h-6 duration-200 hover:font-medium ${isIntersecting
+							<FaTwitter
+								className={`size-6 duration-200 hover:font-medium ${isIntersecting
 									? " text-slate-400 hover:text-slate-100"
 									: "text-slate-600 hover:text-slate-900"
 									} `}
 							/>
 						</Link>
 						<Link target="_blank" href="https://github.com/danditomaso">
-							<Github
-								className={`w-6 h-6 duration-200 hover:font-medium ${isIntersecting
+							<FaGithub
+								className={`size-6 duration-200 hover:font-medium ${isIntersecting
 									? " text-slate-400 hover:text-slate-100"
 									: "text-slate-600 hover:text-slate-900"
 									} `}
@@ -91,7 +94,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 							: "text-slate-600 hover:text-slate-900"
 							} `}
 					>
-						<ArrowLeft className="w-6 h-6 " />
+						<HiArrowLeft className="size-6" />
 					</Link>
 				</div>
 			</div>
@@ -107,10 +110,10 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 					</div>
 
 					<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-						<div className="grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
+						<div className="group grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
 							{links.map((link) => (
-								<Link target="_blank" key={link.label} href={link.href}>
-									{link.label} <span aria-hidden="true">&rarr;</span>
+								<Link target="_blank" key={link.label} href={link.href} className="flex items-center gap-2">
+									{link.label} <HiArrowRight className="size-5 duration-200 group-hover:translate-x-2" />
 								</Link>
 							))}
 						</div>
