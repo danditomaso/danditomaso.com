@@ -1,6 +1,10 @@
 import type { Project } from "@/.content-collections/generated";
 
 export function categorizeProjects(projects: Project[]): Project[] {
+  if (!projects) {
+    return [];
+  }
+
   return projects.filter((p) => p.published).sort((a, b) =>
     new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
     new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
@@ -16,6 +20,3 @@ export function categorizeProjects(projects: Project[]): Project[] {
     }
   )
 }
-
-
-/
