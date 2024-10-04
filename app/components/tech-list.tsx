@@ -32,7 +32,7 @@ export async function TechList({ techUsed }: { techUsed: string[] }) {
         return <span
           key={label}
           title={`${label[0].toUpperCase()}${label.slice(1)} used`}
-          className="flex items-center gap-2 border rounded-xl p-2 hover:bg-slate-800/10 hover:border-slate-400/50 border-slate-600"
+          className="flex items-center gap-2 border rounded-xl p-1.5 lg:p-2 hover:bg-slate-800/10 hover:border-slate-400/50 border-slate-600"
         >
           {IconComponent ? <><IconComponent />{label}</> : label}
         </span>

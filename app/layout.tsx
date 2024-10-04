@@ -2,7 +2,7 @@ import "../global.css";
 import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import type { Metadata } from "next";
-import { Analytics } from "./components/analytics";
+import { Analytics } from "./components/analytics/tracking";
 
 export const metadata: Metadata = {
   title: {
