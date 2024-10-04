@@ -1,4 +1,5 @@
 "use client";
+import type { Project } from "@/.content-collections/generated";
 import Link from "@/app/components/link";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
@@ -6,23 +7,18 @@ import { FaGithub, FaTwitter } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight, HiOutlineEye } from "react-icons/hi";
 
 type Props = {
-	project: {
-		url?: string;
-		title: string;
-		description: string;
-		repository?: string;
-	};
-
+	project: Pick<Project, "title" | "description" | "url" | "repository" | "tech">;
 	views: number;
 };
-export const Header: React.FC<Props> = ({ project, views }) => {
+
+export function Header({ project, views }: Props) {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
 	const links: { label: string; href: string }[] = [];
 	if (project.repository) {
 		links.push({
-			label: "GitHub",
+			label: "Github",
 			href: `https://github.com/${project.repository}`,
 		});
 	}
@@ -36,9 +32,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 		if (!ref.current) {
 			return;
 		}
-		const observer = new IntersectionObserver(([entry]) =>
-			setIntersecting(entry.isIntersecting),
-		);
+		const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
 
 		observer.observe(ref.current);
 		return () => observer.disconnect();
@@ -59,15 +53,15 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 					<div className="flex justify-between gap-8">
 						<span
 							title="View counter for this page"
-							className={`duration-200 hover:font-medium flex items-center gap-1 pointer-events-none ${isIntersecting
+							className={`duration-200 hover:font-medium flex items-center gap-1 ${isIntersecting
 								? " text-slate-400 hover:text-slate-100"
 								: "text-slate-600 hover:text-slate-900"
 								} `}
 						>
 							<HiOutlineEye className="w-5 h-5" />{" "}
-							{Intl.NumberFormat("en-US", { notation: "compact" }).format(
+							<span className="pointer-events-none">{Intl.NumberFormat("en-US", { notation: "compact" }).format(
 								views,
-							)}
+							)}</span>
 						</span>
 						<Link target="_blank" href="https://twitter.com/danditomaso">
 							<FaTwitter
@@ -99,27 +93,33 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 				</div>
 			</div>
 			<div className="container mx-auto relative isolate overflow-hidden  py-24 sm:py-32">
-				<div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
-					<div className="mx-auto max-w-2xl lg:mx-0">
-						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-center">
+					<div className="max-w-6xl flex flex-col place-items-center lg:mx-0">
+						<h1 className="text-[16vmin] font-bold tracking-tight text-white font-display">
 							{project.title}
 						</h1>
-						<p className="mt-6 text-lg leading-8 text-slate-300">
+						<p className="text-lg mt-4 leading-8 text-slate-300 text-balance max-w-[60ch] ">
 							{project.description}
 						</p>
-					</div>
 
-					<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-						<div className="group grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-							{links.map((link) => (
-								<Link target="_blank" key={link.label} href={link.href} className="flex items-center gap-2">
-									{link.label} <HiArrowRight className="size-5 duration-200 group-hover:translate-x-2" />
-								</Link>
-							))}
+
+						{/* <p className="text-lg leading-8 text-slate-300 items-center mt-6 capitalize">{project.tech.join(` ${String.fromCharCode(183)}`)}</p> */}
+
+						<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+							<div className="grid grid-cols-3 gap-y-6 gap-x-8 text-base font-semibold leading-7 sm:grid-cols-2 md:flex lg:gap-x-10">
+								{links.map((link) => (
+									<div key={link.label}>
+										<Link target="_blank" key={link.label} href={link.href} className="flex items-center  text-white gap-2">
+											{link.label} <HiArrowRight className="size-5 duration-200 hover:translate-x-2" />
+										</Link>
+									</div>
+								))}
+							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
-		</header>
-	);
-};
+		</header >
+	)
+}

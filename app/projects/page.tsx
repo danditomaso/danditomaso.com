@@ -4,9 +4,10 @@ import { allProjects } from "content-collections";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
-import { Redis } from "@upstash/redis";
 import { HiArrowRight, HiOutlineEye } from "react-icons/hi";
 import { TechList } from "../components/tech-list";
+import { categorizeProjects } from "@/service/projects";
+import { Redis } from "@upstash/redis";
 
 const redis = Redis.fromEnv();
 
@@ -21,31 +22,20 @@ export default async function ProjectsPage() {
     return acc;
   }, {} as Record<string, number>);
 
-  const featured = allProjects.find((project) => project.slug === "unkey")!;
-  const top2 = allProjects.find((project) => project.slug === "planetfall")!;
-  const top3 = allProjects.find((project) => project.slug === "highstorm")!;
-  const sorted = allProjects
-    .filter((p) => p.published)
-    .filter(
-      (project) =>
-        project.slug !== featured.slug &&
-        project.slug !== top2.slug &&
-        project.slug !== top3.slug,
-    )
-    .sort(
-      (a, b) =>
-        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
-    );
+  const projectsWithCatagories = categorizeProjects(allProjects);
+
+  // Get top 3 projects (e.g., featured, top2, top3)
+  const featuredProjects = projectsWithCatagories.slice(0, 3);
+  const [featured, top2, top3] = featuredProjects;
+  // Everything else
+  const otherProjects = projectsWithCatagories.slice(3);
 
   return (
     <div className="relative pb-16">
       <Navigation />
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-100 sm:text-4xl">
-            Projects
-          </h2>
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-100">Projects</h2>
           <p className="mt-4 text-slate-400">
             Some of the projects are from work and some are on my own time.
           </p>
@@ -89,53 +79,32 @@ export default async function ProjectsPage() {
                   <TechList techUsed={featured.tech} />
                   <div className="mt-auto group">
                     <p className="flex items-center gap-2 text-slate-200 hover:text-slate-50">
-                      Read more <HiArrowRight className="size-5 duration-200 group-hover:translate-x-2" />
+                      Read more
+                      <HiArrowRight className="size-5 duration-200 group-hover:translate-x-2" />
                     </p>
                   </div>
                 </>
               </article>
-
             </Link>
           </Card>
 
           <div className="flex flex-col w-full gap-8 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 ">
-            {[top2, top3].map((project) => (
-              <Card key={project.slug}>
+            {[top2, top3].map((project) => {
+              return <Card key={project.slug}>
                 <Article project={project} views={views[project.slug] ?? 0} />
               </Card>
-            ))}
+            })}
           </div>
         </div>
         <div className="hidden w-full h-px md:block bg-slate-800" />
 
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
-          <div className="grid grid-cols-1 gap-4">
-            {sorted
-              .filter((_, i) => i % 3 === 0)
-              .map((project) => (
-                <Card key={project.slug}>
-                  <Article project={project} views={views[project.slug] ?? 0} />
-                </Card>
-              ))}
-          </div>
-          <div className="grid grid-cols-1 gap-4">
-            {sorted
-              .filter((_, i) => i % 3 === 1)
-              .map((project) => (
-                <Card key={project.slug}>
-                  <Article project={project} views={views[project.slug] ?? 0} />
-                </Card>
-              ))}
-          </div>
-          <div className="grid grid-cols-1 gap-4">
-            {sorted
-              .filter((_, i) => i % 3 === 2)
-              .map((project) => (
-                <Card key={project.slug}>
-                  <Article project={project} views={views[project.slug] ?? 0} />
-                </Card>
-              ))}
-          </div>
+          {otherProjects
+            .map((project) => (
+              <Card key={project.slug}>
+                <Article project={project} views={views[project.slug] ?? 0} />
+              </Card>
+            ))}
         </div>
       </div>
     </div>
