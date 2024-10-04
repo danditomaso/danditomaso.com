@@ -5,7 +5,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
-const posts = defineCollection({
+const projects = defineCollection({
   name: "projects",
   directory: "./content/projects",
   include: "**/*.mdx",
@@ -15,8 +15,9 @@ const posts = defineCollection({
     published: z.boolean().optional(),
     date: z.string().optional(),
     url: z.string().optional(),
-    respository: z.string().optional(),
+    repository: z.string().optional(),
     tech: z.array(z.string()),
+    display: z.enum(["featured", "top3", "top2"]).optional(),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
@@ -57,7 +58,6 @@ const posts = defineCollection({
       ...document,
       mdx,
       slug: document._meta.path,
-      url: `/projects/${document._meta.path}`,
       contentType: "mdx",
     };
   },
@@ -65,5 +65,5 @@ const posts = defineCollection({
 
 
 export default defineConfig({
-  collections: [posts],
+  collections: [projects],
 });

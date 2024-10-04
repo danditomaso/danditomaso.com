@@ -1,18 +1,17 @@
 import { RedisClient } from "@/service/redis";
-import { Redis } from "@upstash/redis";
-import { type NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 
 const redis = new RedisClient();
-export const config = {
-  runtime: "edge",
-};
 
-export default async function incr(req: NextRequest): Promise<NextResponse> {
+export const runtime = "edge"
+
+export async function POST(req: Request) {
   if (req.method !== "POST") {
-    return new NextResponse("use POST", { status: 405 });
+    return new Response("This must be a request using the POST method", { status: 405 });
   }
+
   if (req.headers.get("Content-Type") !== "application/json") {
-    return new NextResponse("must be json", { status: 400 });
+    return new Response("Must be JSON", { status: 400 });
   }
 
   const body = await req.json();
@@ -20,10 +19,13 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
   if ("slug" in body) {
     slug = body.slug;
   }
+
   if (!slug) {
-    return new NextResponse("Slug not found", { status: 400 });
+    return new Response("Slug not found", { status: 400 });
   }
-  const ip = req.ip;
+  const headersList = headers();
+  const ip = headersList.get("x-forwarded-for") ?? "127.0.0.1"
+
   if (ip) {
     // Hash the IP in order to not store it directly in your db.
     const buf = await crypto.subtle.digest(
@@ -40,9 +42,9 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
       ex: 24 * 60 * 60,
     });
     if (!isNew) {
-      new NextResponse(null, { status: 202 });
+      new Response(null, { status: 202 });
     }
   }
-  await redis.incr(["pageviews", "projects", slug].join(":"));
-  return new NextResponse(null, { status: 202 });
+  await redis.incr(["pageviews", "projects", slug]);
+  return new Response(null, { status: 202 });
 }
