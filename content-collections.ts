@@ -28,17 +28,17 @@ const projects = defineCollection({
           rehypePrettyCode,
           {
             theme: "github-dark",
-            onVisitLine(node) {
+            onVisitLine(node: any) {
               // Prevent lines from collapsing in `display: grid` mode, and allow empty
               // lines to be copy/pasted
               if (node.children.length === 0) {
                 node.children = [{ type: "text", value: " " }];
               }
             },
-            onVisitHighlightedLine(node) {
+            onVisitHighlightedLine(node: any) {
               node.properties.className.push("line--highlighted");
             },
-            onVisitHighlightedWord(node) {
+            onVisitHighlightedWord(node: any) {
               node.properties.className = ["word--highlighted"];
             },
           },
