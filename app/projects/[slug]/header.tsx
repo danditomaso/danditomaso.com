@@ -1,6 +1,7 @@
 "use client";
 import type { Project } from "@/.content-collections/generated";
 import Link from "@/app/components/link";
+import { TechList } from "@/app/components/tech-list";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaTwitter } from "react-icons/fa";
@@ -92,33 +93,32 @@ export function Header({ project, views }: Props) {
 					</Link>
 				</div>
 			</div>
-			<div className="container mx-auto relative isolate overflow-hidden  py-24 sm:py-32">
-				<div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-center">
-					<div className="max-w-6xl flex flex-col place-items-center lg:mx-0">
-						<h1 className="text-[16vmin] font-bold tracking-tight text-white font-display">
-							{project.title}
-						</h1>
-						<p className="text-lg mt-4 leading-8 text-slate-300 text-balance max-w-[60ch] ">
-							{project.description}
-						</p>
+			<div className="container mx-auto flex flex-col place-content-center place-items-center relative isolate overflow-hidden px-6 lg:px-8 py-24 sm:py-32">
+				<div className="flex flex-col place-items-center place-content-center max-w-[60ch]  lg:mx-0">
+					<h1 className="text-[7vmin] font-bold tracking-tight text-white font-display">
+						{project.title}
+					</h1>
+					<p className="text-lg mt-4 leading-8 text-slate-300">
+						{project.description}
+					</p>
 
-
-						{/* <p className="text-lg leading-8 text-slate-300 items-center mt-6 capitalize">{project.tech.join(` ${String.fromCharCode(183)}`)}</p> */}
-
-						<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-							<div className="grid grid-cols-3 gap-y-6 gap-x-8 text-base font-semibold leading-7 sm:grid-cols-2 md:flex lg:gap-x-10">
-								{links.map((link) => (
-									<div key={link.label}>
-										<Link target="_blank" key={link.label} href={link.href} className="flex items-center  text-white gap-2">
-											{link.label} <HiArrowRight className="size-5 duration-200 hover:translate-x-2" />
-										</Link>
-									</div>
-								))}
-							</div>
-						</div>
+					<div className="mt-6">
+						<TechList techUsed={project.tech} className="text-slate-300" />
 					</div>
 
+					<div className="mx-auto mt-6 max-w-2xl lg:mx-0 lg:max-w-none">
+						<div className="grid grid-cols-3 gap-y-6 gap-x-8 text-base font-semibold leading-7 sm:grid-cols-2 md:flex lg:gap-x-10">
+							{links.map((link) => (
+								<div key={link.label}>
+									<Link target="_blank" key={link.label} href={link.href} className="flex items-center  text-white gap-2">
+										{link.label} <HiArrowRight className="size-5 duration-200 hover:translate-x-2" />
+									</Link>
+								</div>
+							))}
+						</div>
+					</div>
 				</div>
+
 			</div>
 		</header >
 	)

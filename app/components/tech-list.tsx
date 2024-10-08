@@ -1,7 +1,9 @@
+'use client'
+import { cn } from "@/util/style";
 import { BiLogoRedux, BiLogoReact, BiLogoNodejs, BiLogoGraphql, BiLogoTailwindCss, BiLogoPostgresql, BiLogoTypescript } from "react-icons/bi";
 import { SiNextdotjs } from "react-icons/si";
 
-export async function TechList({ techUsed }: { techUsed: string[] }) {
+export function TechList({ techUsed, className }: { techUsed: string[], className?: string }) {
   if (!techUsed) {
     return null;
   }
@@ -32,7 +34,10 @@ export async function TechList({ techUsed }: { techUsed: string[] }) {
         return <span
           key={label}
           title={`${label[0].toUpperCase()}${label.slice(1)} used`}
-          className="flex items-center gap-2 border rounded-xl p-1.5 lg:p-2 hover:bg-slate-800/10 hover:border-slate-400/50 border-slate-600"
+          className={cn(
+            "flex items-center gap-2 border rounded-xl p-1.5 lg:p-2 hover:bg-slate-800/10 hover:border-slate-400/50 border-slate-600",
+            className,
+          )}
         >
           {IconComponent ? <><IconComponent />{label}</> : label}
         </span>
