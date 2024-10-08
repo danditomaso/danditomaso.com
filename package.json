@@ -8,9 +8,8 @@
     "build:bundle-analyzer": "ANALYZE=true next build",
     "start": "next start",
     "test": "vitest",
-    "lint": "biome lint",
-    "lint:fix": "biome lint --write",
-    "format": "biome format",
+    "check": "biome check --write",
+    "ci": "biome ci --write",
     "md:watch": "content-collections watch"
   },
   "dependencies": {
