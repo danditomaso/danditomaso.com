@@ -25,7 +25,7 @@ function Navigation() {
         ))}
       </ul>
     </nav>
-  )
+  );
 }
 
 function Header() {
@@ -36,35 +36,25 @@ function Header() {
       </h1>
 
       <div className="animate-fade-in mt-3 tracking-widerest lg:max-w-[38ch] text-balance">
-        <h2 className="text-md tracking-widerest text-white">
-          Full Stack Developer
-        </h2>
+        <h2 className="text-md tracking-widerest text-white">Full Stack Developer</h2>
         <h3 className="text-md font-light leading-normal mt-4 text-slate-400 tracking-widest">
-          I'm a developer with a{" "}
-          <Link
-            target="_blank"
-            href="/projects"
-            className="underline"
-          >
+          I'm a full stack developer with a{" "}
+          <Link target="_blank" href="/projects" className="underline">
             focus
-          </Link> building on pixel-perfect, engaging, and delightful front-end experiences.
-
+          </Link>{" "}
+          building on pixel-perfect, engaging, and delightful front-end experiences.
         </h3>
       </div>
     </header>
-  )
+  );
 }
 
 export default function Home() {
   return (
     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center w-screen h-screen px-6 py-12 md:px-8 md:py-20 lg:px-24 lg:py-0 overflow-hidden bg-gradient-to-tl from-slate-900/95 via-slate-900/60 to-slate-900/30">
-      <Particles
-        className="absolute inset-0 -z-10 animate-fade-in"
-        quantity={1000}
-      />
+      <Particles className="absolute inset-0 -z-10 animate-fade-in" quantity={1000} />
       <Header />
       <Navigation />
     </div>
   );
-
 }
