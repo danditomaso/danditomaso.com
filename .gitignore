@@ -39,4 +39,8 @@ next-env.d.ts
 # vscode
 .vscode
 
+#content
 .content-collections
+
+#mdx files
+content/other
