@@ -8,9 +8,13 @@ type Props = {
 	views: number;
 };
 
-export const Article: React.FC<Props> = ({ project, views }) => {
+export function Article({ project, views }: Props) {
+	if (!project) {
+		return null;
+	}
+
 	return (
-		<Link href={`/projects/${project.slug}`}>
+		<Link href={`/projects/${project?.slug}`}>
 			<article className="p-4 md:p-8">
 				<div className="flex justify-between gap-3 items-center">
 					<span className="text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200">
