@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/util/style";
-import type { IconType } from "react-icons";
 import {
   BiLogoRedux,
   BiLogoReact,
@@ -14,6 +13,7 @@ import {
 import {
   SiBun,
   SiCloudflare,
+  SiDeno,
   SiFigma,
   SiHono,
   SiNextdotjs,
@@ -37,6 +37,7 @@ export function TechList({ techUsed, className }: { techUsed: string[]; classNam
   const techMap: Record<string, TechItem> = {
     typescript: { label: "TypeScript", icon: <BiLogoTypescript /> },
     node: { label: "Node.js", icon: <BiLogoNodejs /> },
+    deno: { label: "Deno", icon: <SiDeno size={12} /> },
     next: { label: "Next.js", icon: <SiNextdotjs size="12" /> },
     react: { label: "React", icon: <BiLogoReact /> },
     remix: { label: "Remix", icon: <SiRemix size="12" /> },
