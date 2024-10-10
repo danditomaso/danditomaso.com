@@ -8,6 +8,8 @@ import { HiArrowRight, HiOutlineEye } from "react-icons/hi";
 import { TechList } from "../components/tech-list";
 import { categorizeProjects } from "@/service/projects";
 import { Redis } from "@upstash/redis";
+import { Container } from "postcss";
+import { ContentError } from "../errors";
 
 const redis = Redis.fromEnv();
 
@@ -22,13 +24,13 @@ export default async function ProjectsPage() {
     return acc;
   }, {} as Record<string, number>);
 
-  const projectsWithCatagories = categorizeProjects(allProjects);
+  const result = categorizeProjects(allProjects);
 
-  // Get top 3 projects (e.g., featured, top2, top3)
-  const featuredProjects = projectsWithCatagories.slice(0, 3);
-  const [featured, top2, top3] = featuredProjects;
-  // Everything else
-  const otherProjects = projectsWithCatagories.slice(3);
+  if (result.isErr()) {
+    throw new ContentError({ message: "No projects found", name: 'ERROR_CATEGORIZING_PROJECTS', cause: result.error });
+  }
+  const { featured, top2, top3, otherProjects } = result.value;
+
 
   return (
     <div className="relative pb-16">
@@ -89,8 +91,8 @@ export default async function ProjectsPage() {
           </Card>
 
           <div className="flex flex-col w-full gap-8 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 ">
-            {[top2, top3].map((project) => {
-              return <Card key={project.slug}>
+            {[top2, top3]?.map((project) => {
+              return <Card key={project?.slug}>
                 <Article project={project} views={views[project.slug] ?? 0} />
               </Card>
             })}
@@ -100,9 +102,9 @@ export default async function ProjectsPage() {
 
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
           {otherProjects
-            .map((project) => (
-              <Card key={project.slug}>
-                <Article project={project} views={views[project.slug] ?? 0} />
+            ?.map((project) => (
+              <Card key={project?.slug}>
+                <Article project={project} views={views[project?.slug] ?? 0} />
               </Card>
             ))}
         </div>
