@@ -2,8 +2,7 @@ import { useMDXComponent } from "@content-collections/mdx/react";
 import clsx from "clsx";
 import Image from "next/image";
 import type { ImageProps } from "next/image";
-import Link from "next/link";
-// @ts-nocheck
+import Link from "../components/link";
 import type * as React from "react";
 
 type MdxComponentProps = {
@@ -50,12 +49,17 @@ const MdxComponents = {
       {...props}
     />
   ),
-  a: ({ className, ...props }: MdxComponentProps & { href: string }) => (
-    <Link
+  a: ({ className, href, ...props }: MdxComponentProps & { href?: string }) => {
+    if (!href) {
+      return null
+    }
+
+    return <Link
+      href={href ?? ""}
       className={clsx("font-medium text-slate-900 underline underline-offset-4", className)}
       {...props}
     />
-  ),
+  },
   p: ({ className, ...props }: MdxComponentProps) => (
     <p className={clsx("leading-7 [&:not(:first-child)]:mt-6", className)} {...props} />
   ),

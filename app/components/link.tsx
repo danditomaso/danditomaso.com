@@ -3,12 +3,12 @@ import NextLink from "next/link";
 
 type LinkProps = {
   href: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   target?: "_blank";
 };
 
-export default function Link({ href, children, target, className }: LinkProps) {
+export default function Link({ href, children, target, className }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <NextLink
       href={href}
