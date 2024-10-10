@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 
 const redis = new RedisClient();
 
-export const runtime = "edge"
+export const runtime = "edge";
 
 export async function POST(req: Request) {
   if (req.method !== "POST") {
@@ -24,14 +24,11 @@ export async function POST(req: Request) {
     return new Response("Slug not found", { status: 400 });
   }
   const headersList = headers();
-  const ip = headersList.get("x-forwarded-for") ?? "127.0.0.1"
+  const ip = headersList.get("x-forwarded-for") ?? "127.0.0.1";
 
   if (ip) {
     // Hash the IP in order to not store it directly in your db.
-    const buf = await crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode(ip),
-    );
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
     const hash = Array.from(new Uint8Array(buf))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");

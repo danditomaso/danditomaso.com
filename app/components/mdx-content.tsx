@@ -10,7 +10,6 @@ type MdxComponentProps = {
   className?: string;
 };
 
-
 const MdxComponents = {
   h1: ({ className, ...props }: MdxComponentProps) => (
     <h1
@@ -66,7 +65,9 @@ const MdxComponents = {
   ol: ({ className, ...props }: MdxComponentProps) => (
     <ol className={clsx("my-6 ml-6 list-decimal", className)} {...props} />
   ),
-  li: ({ className, ...props }: MdxComponentProps) => <li className={clsx("mt-2", className)} {...props} />,
+  li: ({ className, ...props }: MdxComponentProps) => (
+    <li className={clsx("mt-2", className)} {...props} />
+  ),
   blockquote: ({ className, ...props }: MdxComponentProps) => (
     <blockquote
       className={clsx(

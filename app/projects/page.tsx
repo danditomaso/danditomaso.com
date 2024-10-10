@@ -1,15 +1,15 @@
 import Link from "@/app/components/link";
-import React from "react";
-import { allProjects } from "content-collections";
-import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
-import { Article } from "./article";
-import { HiArrowRight, HiOutlineEye } from "react-icons/hi";
-import { TechList } from "../components/tech-list";
 import { categorizeProjects } from "@/service/projects";
 import { Redis } from "@upstash/redis";
+import { allProjects } from "content-collections";
 import { Container } from "postcss";
+import React from "react";
+import { HiArrowRight, HiOutlineEye } from "react-icons/hi";
+import { Card } from "../components/card";
+import { Navigation } from "../components/nav";
+import { TechList } from "../components/tech-list";
 import { ContentError } from "../errors";
+import { Article } from "./article";
 
 const redis = Redis.fromEnv();
 
@@ -19,18 +19,24 @@ export default async function ProjectsPage() {
     await redis.mget<number[]>(
       ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
     )
-  ).reduce((acc, v, i) => {
-    acc[allProjects[i].slug] = v ?? 0;
-    return acc;
-  }, {} as Record<string, number>);
+  ).reduce(
+    (acc, v, i) => {
+      acc[allProjects[i].slug] = v ?? 0;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
   const result = categorizeProjects(allProjects);
 
   if (result.isErr()) {
-    throw new ContentError({ message: "No projects found", name: 'ERROR_CATEGORIZING_PROJECTS', cause: result.error });
+    throw new ContentError({
+      message: "No projects found",
+      name: "ERROR_CATEGORIZING_PROJECTS",
+      cause: result.error,
+    });
   }
   const { featured, top2, top3, otherProjects } = result.value;
-
 
   return (
     <div className="relative pb-16">
@@ -92,21 +98,22 @@ export default async function ProjectsPage() {
 
           <div className="flex flex-col w-full gap-8 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 ">
             {[top2, top3]?.map((project) => {
-              return <Card key={project?.slug}>
-                <Article project={project} views={views[project.slug] ?? 0} />
-              </Card>
+              return (
+                <Card key={project?.slug}>
+                  <Article project={project} views={views[project.slug] ?? 0} />
+                </Card>
+              );
             })}
           </div>
         </div>
         <div className="hidden w-full h-px md:block bg-slate-800" />
 
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
-          {otherProjects
-            ?.map((project) => (
-              <Card key={project?.slug}>
-                <Article project={project} views={views[project?.slug] ?? 0} />
-              </Card>
-            ))}
+          {otherProjects?.map((project) => (
+            <Card key={project?.slug}>
+              <Article project={project} views={views[project?.slug] ?? 0} />
+            </Card>
+          ))}
         </div>
       </div>
     </div>

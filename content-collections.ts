@@ -63,7 +63,6 @@ const projects = defineCollection({
   },
 });
 
-
 export default defineConfig({
   collections: [projects],
 });

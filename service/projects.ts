@@ -1,8 +1,7 @@
 import type { Project } from "@/.content-collections/generated";
 import { ContentError } from "@/app/errors";
 import { C } from "@upstash/redis/zmscore-BLgYk16R";
-import { ok, err, type Result } from "neverthrow";
-
+import { type Result, err, ok } from "neverthrow";
 
 type CategorizedProjects = {
   featured: Project;
@@ -13,11 +12,13 @@ type CategorizedProjects = {
 
 export function categorizeProjects(projects: Project[]): Result<CategorizedProjects, ContentError> {
   if (!projects) {
-    return err(new ContentError({
-      name: "UNABLE_TO_LOAD_PROJECTS",
-      message: "Unable to load projects, no projects were passed to categorizeProjects service",
-    }));
-  };
+    return err(
+      new ContentError({
+        name: "UNABLE_TO_LOAD_PROJECTS",
+        message: "Unable to load projects, no projects were passed to categorizeProjects service",
+      }),
+    );
+  }
 
   const allProjects = projects
     .filter((p) => p.published)

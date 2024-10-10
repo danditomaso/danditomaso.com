@@ -76,7 +76,7 @@ class RedisClient {
   async mget<TData>(keys: string[], keyTransform: (key: string) => string): Promise<TData[]> {
     try {
       // Map keys using the transformation function if provided
-      const transformedKeys = keys.map((key) => keyTransform ? keyTransform(key) : key);
+      const transformedKeys = keys.map((key) => (keyTransform ? keyTransform(key) : key));
       const data = await this.client.mget(...transformedKeys);
 
       return data.reduce<TData[]>((acc, value) => {
@@ -90,7 +90,6 @@ class RedisClient {
       return [];
     }
   }
-
 
   async del(key: string): Promise<number> {
     try {

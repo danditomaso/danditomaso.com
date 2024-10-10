@@ -1,14 +1,14 @@
 "use client";
 import { cn } from "@/util/style";
 import {
-  BiLogoRedux,
-  BiLogoReact,
-  BiLogoNodejs,
-  BiLogoGraphql,
-  BiLogoTailwindCss,
-  BiLogoPostgresql,
-  BiLogoTypescript,
   BiLogoFigma,
+  BiLogoGraphql,
+  BiLogoNodejs,
+  BiLogoPostgresql,
+  BiLogoReact,
+  BiLogoRedux,
+  BiLogoTailwindCss,
+  BiLogoTypescript,
 } from "react-icons/bi";
 import {
   SiBun,
@@ -31,7 +31,7 @@ export function TechList({ techUsed, className }: { techUsed: string[]; classNam
 
   type TechItem = {
     label: string;
-    icon: React.ReactNode
+    icon: React.ReactNode;
   };
 
   const techMap: Record<string, TechItem> = {

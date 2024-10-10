@@ -18,4 +18,4 @@ export function ViewCounter({ slug }: ViewCountProps) {
   }, [slug]);
 
   return null;
-};
+}
