@@ -55,7 +55,7 @@ export default function Home() {
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={1500}
-        staticity={100}
+        staticity={50}
       />
       <Header />
       <Navigation />

@@ -33,7 +33,6 @@ export default function Particles({
     }
     initCanvas();
     animate();
-    window.addEventListener("resize", initCanvas);
 
     return () => {
       window.removeEventListener("resize", initCanvas);
@@ -98,7 +97,7 @@ export default function Particles({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const size = Math.floor(Math.random() * 2) + 0.1;
+    const size = Math.floor(Math.random() * 2) + 0.9;
     const alpha = 0;
     const targetAlpha = Number.parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.2;
