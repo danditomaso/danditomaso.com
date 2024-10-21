@@ -45,21 +45,19 @@ export function Header({ project, views }: Props) {
       className="relative isolate overflow-hidden bg-gradient-to-tl from-black via-slate-900 to-black"
     >
       <div
-        className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
-          isIntersecting
-            ? "bg-slate-800/0 border-transparent"
-            : "bg-white/10  border-slate-200 lg:border-transparent"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${isIntersecting
+          ? "bg-slate-800/0 border-transparent"
+          : "bg-white/10  border-slate-200 lg:border-transparent"
+          }`}
       >
-        <div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
+        <div className="max-w-7xl flex flex-row-reverse items-center justify-between p-6 mx-auto">
           <div className="flex justify-between gap-8">
             <span
               title="View counter for this page"
-              className={`duration-200 hover:font-medium flex items-center gap-1 ${
-                isIntersecting
-                  ? " text-slate-400 hover:text-slate-100"
-                  : "text-slate-600 hover:text-slate-900"
-              } `}
+              className={`duration-200 hover:font-medium flex items-center gap-1 ${isIntersecting
+                ? " text-slate-400 hover:text-slate-100"
+                : "text-slate-600 hover:text-slate-900"
+                } `}
             >
               <HiOutlineEye className="w-5 h-5" />{" "}
               <span className="pointer-events-none">
@@ -68,37 +66,34 @@ export function Header({ project, views }: Props) {
             </span>
             <Link target="_blank" href="https://twitter.com/danditomaso">
               <FaTwitter
-                className={`size-6 duration-200 hover:font-medium ${
-                  isIntersecting
-                    ? " text-slate-400 hover:text-slate-100"
-                    : "text-slate-600 hover:text-slate-900"
-                } `}
+                className={`size-6 duration-200 hover:font-medium ${isIntersecting
+                  ? " text-slate-400 hover:text-slate-100"
+                  : "text-slate-600 hover:text-slate-900"
+                  } `}
               />
             </Link>
             <Link target="_blank" href="https://github.com/danditomaso">
               <FaGithub
-                className={`size-6 duration-200 hover:font-medium ${
-                  isIntersecting
-                    ? " text-slate-400 hover:text-slate-100"
-                    : "text-slate-600 hover:text-slate-900"
-                } `}
+                className={`size-6 duration-200 hover:font-medium ${isIntersecting
+                  ? " text-slate-400 hover:text-slate-100"
+                  : "text-slate-600 hover:text-slate-900"
+                  } `}
               />
             </Link>
           </div>
 
           <Link
             href="/projects"
-            className={`duration-200 hover:font-medium ${
-              isIntersecting
-                ? " text-slate-400 hover:text-slate-100"
-                : "text-slate-600 hover:text-slate-900"
-            } `}
+            className={`duration-200 hover:font-medium ${isIntersecting
+              ? " text-slate-400 hover:text-slate-100"
+              : "text-slate-600 hover:text-slate-900"
+              } `}
           >
             <HiArrowLeft className="size-6" />
           </Link>
         </div>
       </div>
-      <div className="container mx-auto flex flex-col place-content-center place-items-center relative isolate overflow-hidden px-6 lg:px-8 py-24 sm:py-32">
+      <div className="min-w-7xl container mx-auto flex flex-col place-content-center place-items-center relative isolate overflow-hidden px-6 lg:px-8 py-24 sm:py-32">
         <div className="flex flex-col place-items-center place-content-center max-w-[60ch]  lg:mx-0">
           <h1 className="text-[7vmin] font-bold tracking-tight text-white font-display">
             {project.title}

@@ -31,7 +31,7 @@ export default async function PostPage({ params }: Props) {
       <Header project={project} views={views} />
       <ViewCounter slug={project.slug} />
 
-      <article className="px-4 py-12 mx-auto prose prose-slate prose-quoteless">
+      <article className="px-4 py-12 min-w-7xl mx-auto prose prose-slate prose-quoteless">
         <MDX code={project.mdx} />
       </article>
     </div>

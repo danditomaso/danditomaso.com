@@ -2,7 +2,6 @@ import Link from "@/app/components/link";
 import { categorizeProjects } from "@/service/projects";
 import { Redis } from "@upstash/redis";
 import { allProjects } from "content-collections";
-import { Container } from "postcss";
 import React from "react";
 import { HiArrowRight, HiOutlineEye } from "react-icons/hi";
 import { Card } from "../components/card";
