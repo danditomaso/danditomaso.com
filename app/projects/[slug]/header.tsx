@@ -95,7 +95,7 @@ export function Header({ project, views }: Props) {
       </div>
       <div className="min-w-7xl container mx-auto flex flex-col place-content-center place-items-center relative isolate overflow-hidden px-6 lg:px-8 py-24 sm:py-32">
         <div className="flex flex-col place-items-center place-content-center max-w-[60ch]  lg:mx-0">
-          <h1 className="text-[7vmin] font-bold tracking-tight text-white font-display">
+          <h1 className="text-[7vmin] lg:text-[6vmin] font-bold tracking-tight text-white font-display">
             {project.title}
           </h1>
           <p className="text-lg mt-4 leading-8 text-slate-300">{project.description}</p>
