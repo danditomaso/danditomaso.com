@@ -1,6 +1,5 @@
 import type { Project } from "@/.content-collections/generated";
 import { ContentError } from "@/app/errors";
-import { C } from "@upstash/redis/zmscore-BLgYk16R";
 import { type Result, err, ok } from "neverthrow";
 
 type CategorizedProjects = {
