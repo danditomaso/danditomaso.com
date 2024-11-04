@@ -99,7 +99,7 @@ const MdxComponents = {
     ),
   img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // biome-ignore lint/a11y/useAltText: alt text prop is present, biome is being a pain.
-    <img className={clsx("rounded-md border border-slate-200", className)} alt={alt} {...props} />
+    (<img className={clsx("rounded-md border border-slate-200", className)} alt={alt} {...props} />)
   ),
   hr: ({ ...props }) => <hr className="my-4 border-slate-200 md:my-8" {...props} />,
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
