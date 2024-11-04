@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   if (!slug) {
     return new Response("Slug not found", { status: 400 });
   }
-  const headersList = headers();
+  const headersList = await headers();
   const ip = headersList.get("x-forwarded-for") ?? "127.0.0.1";
 
   if (ip) {
