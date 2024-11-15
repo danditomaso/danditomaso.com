@@ -109,7 +109,7 @@ export function Header({ project, views }: Props) {
           <div className="mt-10 max-w-2xl g:mx-0 lg:max-w-none">
             <div className="flex justify-center gap-y-6 gap-x-8 text-base font-semibold leading-7 lg:gap-x-10">
               {links.map((link) => (
-                <div key={link.label}>
+                <div key={link.label} className="group">
                   <Link
                     target="_blank"
                     key={link.label}
@@ -117,7 +117,7 @@ export function Header({ project, views }: Props) {
                     className="flex items-center text-white gap-2"
                   >
                     {link.label}{" "}
-                    <HiArrowRight className="size-5 duration-200 hover:translate-x-2" />
+                    <HiArrowRight className="size-5 duration-200 group-hover:translate-x-2" />
                   </Link>
                 </div>
               ))}
