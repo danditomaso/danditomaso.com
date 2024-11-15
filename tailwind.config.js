@@ -103,5 +103,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("tailwindcss-debug-screens")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwindcss-debug-screens"),
+    require("tailwind-fluid-typography"),
+  ],
 };
