@@ -7,6 +7,26 @@ const nextConfig = {
   images: {
     domains: ["danditomaso.com"],
   },
+  // redirect bots back to home page
+  redirects: async () => {
+    return [
+      {
+        source: "/viewr",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/vewr",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/vwer",
+        destination: "/contact",
+        permanent: true,
+      },
+    ];
+  },
   experimental: {
     mdxRs: true,
   },
