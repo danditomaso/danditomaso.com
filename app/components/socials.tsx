@@ -1,23 +1,24 @@
 import { FaEnvelope, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaBluesky } from 'react-icons/fa6';
 import { Card } from "./card";
 import Link from "./link";
 
 export async function Socials() {
   const socials = [
     {
-      icon: <FaTwitter size={20} />,
-      href: "https://twitter.com/danditomaso",
-      label: "Twitter",
-      handle: "@danditomaso",
+      icon: <FaBluesky size={20} />,
+      href: "https://bky.app/profile/dand.me",
+      label: "Bluesky",
+      handle: "@dand.me",
     },
     {
       icon: <FaEnvelope size={20} />,
-      href: "mailto:hi@danditomaso.com?subject=Inquiry From Website",
+      href: "mailto:dan.ditomaso@gmail.com?subject=Inquiry From Portfolio",
       label: "Email",
-      handle: "hi@danditomaso.com",
+      handle: "dan.ditomaso@gmail.com",
     },
     {
-      icon: <FaGithub size={20} />,
+      icon: <FaGithub size={24} />,
       href: "https://github.com/danditomaso",
       label: "Github",
       handle: "danditomaso",
@@ -29,13 +30,12 @@ export async function Socials() {
   }
 
   return (
-    <div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
+    <div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-8">
       {socials.map((s) => (
         <Card key={s.href}>
           <Link
             href={s.href}
-            target="_blank"
-            className="p-4 relative flex flex-col items-center gap-4 md:gap-8 py-24 md:p-16 duration-700 group md:py-24 lg:pb-48"
+            className="p-16 relative flex flex-col items-center gap-4 md:gap-8 py-24 md:p-16 duration-700 group md:py-24 lg:pb-48"
           >
             <span
               className="absolute w-px h-2/3 bg-gradient-to-b from-slate-500 via-slate-500/50 to-transparent"

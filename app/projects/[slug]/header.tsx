@@ -64,7 +64,7 @@ export function Header({ project, views }: Props) {
                 {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
               </span>
             </span>
-            <Link target="_blank" href="https://twitter.com/danditomaso">
+            <Link href="https://twitter.com/danditomaso">
               <FaTwitter
                 className={`size-6 duration-200 hover:font-medium ${isIntersecting
                   ? " text-slate-400 hover:text-slate-100"
@@ -72,7 +72,7 @@ export function Header({ project, views }: Props) {
                   } `}
               />
             </Link>
-            <Link target="_blank" href="https://github.com/danditomaso">
+            <Link href="https://github.com/danditomaso">
               <FaGithub
                 className={`size-6 duration-200 hover:font-medium ${isIntersecting
                   ? " text-slate-400 hover:text-slate-100"
@@ -111,7 +111,6 @@ export function Header({ project, views }: Props) {
               {links.map((link) => (
                 <div key={link.label} className="group">
                   <Link
-                    target="_blank"
                     key={link.label}
                     href={link.href}
                     className="flex items-center text-white gap-2"

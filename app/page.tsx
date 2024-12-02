@@ -40,7 +40,7 @@ function Header() {
         <h2 className="text-md tracking-widerest text-white">Full Stack Developer</h2>
         <h3 className="text-md font-light leading-normal mt-4 text-slate-400 tracking-widest">
           I'm a full stack developer with a{" "}
-          <Link target="_blank" href="/projects" className="underline">
+          <Link href="/projects" className="underline">
             focus
           </Link>{" "}
           building on pixel-perfect, engaging, and delightful front-end experiences.
