@@ -28,10 +28,10 @@ export function Article({ project, views }: Props) {
               <span>COMING SOON</span>
             )}
           </span>
-          <span className="text-slate-200 text-xs flex items-center gap-2">
+          {/* <span className="text-slate-200 text-xs flex items-center gap-2">
             <HiOutlineEye className="size-5" />{" "}
             {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
-          </span>
+          </span> */}
         </div>
         <h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-slate-200 group-hover:text-white font-display">
           {project.title}

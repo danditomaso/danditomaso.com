@@ -12,17 +12,17 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 const components = {
   h1: (props: HeadingProps) => (
     // <h1 className="fluid-4xl font-bold tracking-tight" {...props} />
-    <h1 className="mt-10 fluid-3xl font-bold tracking-tighter" {...props} />
+    <h1 className="mt-10 fluid-3xl font-bold tracking-tighter font-display" {...props} />
   ),
   h2: (props: HeadingProps) => (
-    <h2 className="mt-8 pb-1 fluid-2xl font-semibold tracking-tight first:mt-0" {...props} />
+    <h2 className="mt-8 fluid-2xl font-semibold tracking-tight font-display first:mt-0" {...props} />
   ),
   h3: (props: HeadingProps) => (
-    <h3 className="mt-8 text-xl font-semibold tracking-tight" {...props} />
+    <h3 className="mt-8 text-xl font-semibold tracking-tight font-display" {...props} />
   ),
-  h4: (props: HeadingProps) => <h4 className="mt-8 text-xl font-semibold tracking-tight" {...props} />,
+  h4: (props: HeadingProps) => <h4 className="mt-8 text-xl font-semibold tracking-tight font-display" {...props} />,
   p: (props: ParagraphProps) => (
-    <p className="fluid-base mt-4 text-slate-800 [&:not(:first-child)]:mt-6"{...props} />
+    <p className="fluid-base mt-4 text-slate-900 [&:not(:first-child)]:mt-6"{...props} />
   ),
   ol: (props: ListProps) => (
     <ol className="my-6 ml-6 list-decimal"{...props} />

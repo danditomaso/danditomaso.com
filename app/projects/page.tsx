@@ -68,12 +68,12 @@ export default async function ProjectsPage() {
                         <span>COMING SOON</span>
                       )}
                     </div>
-                    <span className="flex items-center gap-2 text-xs text-slate-200">
+                    {/* <span className="flex items-center gap-2 text-xs text-slate-200">
                       <HiOutlineEye className="size-5" />
                       {Intl.NumberFormat("en-US", { notation: "compact" }).format(
                         views[featured.slug] ?? 0,
                       )}
-                    </span>
+                    </span> */}
                   </div>
 
                   <h2

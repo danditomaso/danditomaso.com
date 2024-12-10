@@ -12,7 +12,7 @@ type Props = {
   }>;
 };
 
-const redis = new RedisClient();
+// const redis = new RedisClient();
 
 export function generateStaticParams() {
   const projects = allProjects.map((project) => ({ slug: project.slug }));
@@ -23,12 +23,12 @@ export default async function PostPage({ params }: Props) {
   const slug = (await params).slug;
   const { default: Project, meta } = await import(`../../../content/${slug}.mdx`);
 
-  const views = (await redis.get<number>(["pageviews", "projects", slug])) ?? 0;
+  // const views = (await redis.get<number>(["pageviews", "projects", slug])) ?? 0;
 
   return (
     <div className="bg-white min-h-screen">
-      <Header project={meta} views={views} />
-      <ViewCounter slug={slug} />
+      <Header project={meta} views={0} />
+      {/* <ViewCounter slug={slug} /> */}
 
       <article className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-16 md:pt-6 lg:pt-6 min-w-7xl container">
         <Project />
