@@ -1,30 +1,9 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+import defaultTheme from "tailwindcss/defaultTheme";
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./app/**/*.{js,ts,jsx,tsx}", "./mdx-components.tsx", "content/**/*.mdx"],
-
+const config = {
+  content: ["./app/**/*.{tsx,mdx}", "./mdx-components.tsx"],
   theme: {
     extend: {
-      typography: {
-        DEFAULT: {
-          css: {
-            maxWidth: "70ch",
-            "code::before": {
-              content: '""',
-            },
-            "code::after": {
-              content: '""',
-            },
-          },
-        },
-        quoteless: {
-          css: {
-            "blockquote p:first-of-type::before": { content: "none" },
-            "blockquote p:first-of-type::after": { content: "none" },
-          },
-        },
-      },
       letterSpacing: {
         widerest: "2px",
       },
@@ -60,8 +39,7 @@ module.exports = {
           },
 
           "30%": {
-            transform: "translateX(0%)",
-            opacity: "100%",
+            transform: "translateX(0%)", opacity: "100%",
           },
           "100%": {
             opacity: "0%",
@@ -108,4 +86,7 @@ module.exports = {
     require("tailwindcss-debug-screens"),
     require("tailwind-fluid-typography"),
   ],
-};
+}
+
+export default config
+

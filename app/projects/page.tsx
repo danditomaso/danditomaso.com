@@ -35,6 +35,8 @@ export default async function ProjectsPage() {
       cause: result.error,
     });
   }
+  console.log(result.value);
+
   const { featured, top2, top3, otherProjects } = result.value;
 
   return (

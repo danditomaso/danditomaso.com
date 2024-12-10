@@ -1,12 +1,10 @@
 import { notFound } from "next/navigation";
 import { Header } from "./header";
-import "./mdx.css";
 import { ViewCounter } from "@/app/components/analytics/view-count";
-import { MDX } from "@/app/components/mdx-content";
 import { RedisClient } from "@/service/redis";
 import { allProjects } from "content-collections";
 
-export const revalidate = 60;
+export const dynamicParams = false;
 
 type Props = {
   params: Promise<{
@@ -16,25 +14,24 @@ type Props = {
 
 const redis = new RedisClient();
 
-export default async function PostPage(props: Props) {
-  const params = await props.params;
-  const slug = params?.slug;
-  const project = allProjects.find((project) => project.slug === slug);
+export function generateStaticParams() {
+  const projects = allProjects.map((project) => ({ slug: project.slug }));
+  return projects
+}
 
-  if (!project) {
-    notFound();
-  }
+export default async function PostPage({ params }: Props) {
+  const slug = (await params).slug;
+  const { default: Project, meta } = await import(`../../../content/${slug}.mdx`);
 
   const views = (await redis.get<number>(["pageviews", "projects", slug])) ?? 0;
 
   return (
     <div className="bg-white min-h-screen">
-      <Header project={project} views={views} />
-      <ViewCounter slug={project.slug} />
+      <Header project={meta} views={views} />
+      <ViewCounter slug={slug} />
 
-      {/* <article className="px-4 py-12 min-w-7xl mx-auto prose prose-slate prose-quoteless"> */}
-      <article className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-16 md:space-y-16 md:pt-24 lg:pt-32">
-        <MDX code={project.mdx} />
+      <article className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-16 md:pt-6 lg:pt-6 min-w-7xl container">
+        <Project />
       </article>
     </div>
   );
