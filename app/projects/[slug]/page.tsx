@@ -3,9 +3,9 @@ import { Header } from "./header";
 import "./mdx.css";
 import { ViewCounter } from "@/app/components/analytics/view-count";
 import { MDX } from "@/app/components/mdx-content";
+import { getProjectBySlug } from "@/service/projects";
 import { RedisClient } from "@/service/redis";
 import { allProjects } from "content-collections";
-import { getProjectBySlug } from "@/service/projects";
 
 type Props = {
   params: Promise<{
@@ -24,7 +24,7 @@ export default async function PostPage(props: Props) {
     return notFound();
   }
 
-  const _project = project.value
+  const _project = project.value;
 
   const views = (await redis.get<number>(["pageviews", "projects", slug])) ?? 0;
 
@@ -33,7 +33,7 @@ export default async function PostPage(props: Props) {
       <Header project={_project} views={views} />
       <ViewCounter slug={_project.slug} />
 
-      <article className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-16 md:space-y-16 md:pt-24 lg:pt-32">
+      <article className="px-6 pt-14 mx-auto space-y-8 max-w-7xl lg:px-16 md:space-y-16">
         <MDX code={_project.mdx} />
       </article>
     </div>

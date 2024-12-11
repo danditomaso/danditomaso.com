@@ -42,7 +42,8 @@
       ".wrangler",
       ".react-email",
       ".content-collections",
-      "analytics"
+      "analytics",
+      "*.css"
     ]
   },
   "formatter": {

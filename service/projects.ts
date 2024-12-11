@@ -1,19 +1,16 @@
-import { Project } from "@/.content-collections/generated";
 import { ContentError } from "@/app/errors";
+import { Project, SortOrder } from "@/entities/project";
 import { type Result, err, ok } from "neverthrow";
 
 export interface CategorizedProjects {
-  featured: Project | null;
-  top2: Project | null;
-  top3: Project | null;
+  featured: Project;
+  top2: Project;
+  top3: Project;
   otherProjects: Project[];
 }
 
-export type SortOrder = "featured" | "top2" | "top3" | "other";
 
-export function categorizeProjects(
-  projects: Project[],
-): Result<CategorizedProjects, ContentError> {
+export function categorizeProjects(projects: Project[]): Result<CategorizedProjects, ContentError> {
   if (!projects || projects.length === 0) {
     return err(
       new ContentError({
@@ -35,14 +32,13 @@ export function categorizeProjects(
     .filter((p) => p.published) // Include only published projects
     .sort((a, b) => {
       // Primary sort by sortOrder priority
-      const priorityDiff =
-        priority[a.sortOrder as SortOrder] - priority[b.sortOrder as SortOrder];
-      if (priorityDiff !== 0) return priorityDiff;
+      const priorityDiff = priority[a.sortOrder as SortOrder] - priority[b.sortOrder as SortOrder];
+      if (priorityDiff !== 0) {
+        return priorityDiff;
+      }
 
       // Secondary sort by date (most recent first)
-      return (
-        new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 
   if (sortedProjects.length === 0) {
@@ -55,7 +51,7 @@ export function categorizeProjects(
   }
 
   // Extract featured, top2, top3, and otherProjects
-  const [featured = null, top2 = null, top3 = null, ...otherProjects] = sortedProjects;
+  const [featured, top2, top3, ...otherProjects] = sortedProjects;
 
   return ok({ featured, top2, top3, otherProjects });
 }

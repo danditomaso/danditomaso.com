@@ -1,6 +1,10 @@
 import CustomError from "./CustomErrorBase";
 
-type ErrorName = "UNABLE_TO_LOAD_PROJECTS" | "NO_PUBLISHED_PROJECTS" | "PROJECT_NOT_FOUND" | "ERROR_CATEGORIZING_PROJECTS";
+type ErrorName =
+  | "UNABLE_TO_LOAD_PROJECTS"
+  | "NO_PUBLISHED_PROJECTS"
+  | "PROJECT_NOT_FOUND"
+  | "ERROR_CATEGORIZING_PROJECTS";
 
 type ContentErrorProps = {
   name: ErrorName;

@@ -1,8 +1,8 @@
 import { cn } from "@/util/style";
 // import NextLink from "next/link";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 import NextLink from "next/link";
-import { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 type LinkProps = {
   href: string;
@@ -10,7 +10,11 @@ type LinkProps = {
   className?: string;
 } & ComponentPropsWithoutRef<"a">;
 
-export default function _Link({ href, children, className }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+export default function _Link({
+  href,
+  children,
+  className,
+}: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <Link
       href={href}

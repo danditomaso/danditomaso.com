@@ -12,7 +12,8 @@ import { Article } from "./article";
 
 const redis = Redis.fromEnv();
 
-export const revalidate = 60;
+// export const revalidate = 60;
+
 export default async function ProjectsPage() {
   const views = (
     await redis.mget<number[]>(
@@ -35,6 +36,7 @@ export default async function ProjectsPage() {
       cause: result.error,
     });
   }
+
   const { featured, top2, top3, otherProjects } = result.value;
 
   return (
@@ -43,15 +45,13 @@ export default async function ProjectsPage() {
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-16 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-xl">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-100">Projects</h2>
-          <p className="mt-4 text-slate-400">
-            Some of the projects I've been working on.
-          </p>
+          <p className="mt-4 text-slate-400">Some of the projects I've been working on.</p>
         </div>
         <div className="w-full h-px bg-slate-800" />
 
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
           <Card>
-            <Link href={`/projects/${featured.slug}`}>
+            <Link href={`/projects/${featured?.slug}`}>
               <article className="flex flex-col gap-4 p-4 h-full md:p-8">
                 <>
                   <div className="flex items-center justify-between gap-2">

@@ -9,7 +9,7 @@
     "start": "next start",
     "test": "vitest",
     "check": "biome check --write",
-    "ci": "biome ci --write",
+    "ci": "prettier ci --write",
     "md:watch": "content-collections watch"
   },
   "dependencies": {

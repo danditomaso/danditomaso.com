@@ -1,149 +1,126 @@
-import type { Project } from "@/.content-collections/generated";
-import { describe, expect, it } from "vitest";
-import { categorizeProjects } from "./projects"; // adjust path to your function
+import { describe, it, expect } from "vitest";
+import { categorizeProjects } from "./projects";
+import { Project, SortOrder } from "@/entities/project";
 
-// Mock data
-const projects: Project[] = [
-  {
-    mdx: "content1",
-    slug: "proj-1",
-    contentType: "project",
-    content: "content",
-    title: "Project 1",
-    description: "First project",
-    tech: ["React", "TypeScript"],
-    published: true,
-    date: "2023-09-01",
-    display: "featured",
-    url: "http://example.com",
-    repository: "http://repo.com",
-    _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-  },
-  {
-    mdx: "content2",
-    slug: "proj-2",
-    contentType: "project",
-    content: "content",
-    title: "Project 2",
-    description: "Second project",
-    tech: ["Vue", "JavaScript"],
-    published: true,
-    date: "2023-08-01",
-    display: "top2",
-    url: "http://example2.com",
-    repository: "http://repo2.com",
-    _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-  },
-  {
-    mdx: "content3",
-    slug: "proj-3",
-    contentType: "project",
-    content: "content",
-    title: "Project 3",
-    description: "Third project",
-    tech: ["Svelte", "TypeScript"],
-    published: false,
-    date: "2023-07-01",
-    url: "http://example3.com",
-    repository: "http://repo3.com",
-    _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-  },
-  {
-    mdx: "content4",
-    slug: "proj-4",
-    contentType: "project",
-    content: "content",
-    title: "Project 4",
-    description: "Fourth project",
-    tech: ["Angular", "TypeScript"],
-    published: true,
-    date: "2023-07-01",
-    url: "http://example4.com",
-    repository: "http://repo4.com",
-    _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-  },
-  {
-    mdx: "content5",
-    slug: "proj-5",
-    contentType: "project",
-    content: "content",
-    title: "Project 5",
-    description: "Fifth project",
-    tech: ["React", "JavaScript"],
-    published: true,
-    date: "2023-09-02",
-    display: "top3",
-    url: "http://example5.com",
-    repository: "http://repo5.com",
-    _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-  },
-];
+const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
+  mdx: "",
+  contentType: "project",
+  content: "",
+  description: "A test project",
+  tech: ["TypeScript", "React"],
+  published: true,
+  date: "2022-01-01",
+  url: "https://example.com",
+  repository: "https://example.com/repo",
+  _meta: {
+    directory: "projects",
+    extension: ".mdx",
+    fileName: "test-project.mdx",
+    filePath: "/projects/test-project.mdx",
+    path: "/projects/test-project.mdx",
+  }
+};
+
+function createProject(
+  slug: string,
+  title: string,
+  sortOrder: SortOrder,
+  date: string = "2022-01-01",
+  published: boolean = true,
+): Project {
+  return {
+    ...baseProject,
+    slug,
+    title,
+    sortOrder,
+    date,
+    published,
+  };
+}
 
 describe("categorizeProjects", () => {
-  it("filters out unpublished projects", () => {
-    const result = categorizeProjects(projects);
-    expect(result.length).toBe(4); // Only 4 published projects
-    expect(result.every((p) => p.published)).toBe(true);
+  it("returns an error if no projects passed", () => {
+    const result = categorizeProjects([]);
+    expect(result.isErr()).toBe(true);
+    if (result.isErr()) {
+      expect(result.error.name).toBe("UNABLE_TO_LOAD_PROJECTS");
+    }
   });
 
-  it("sorts projects by date in descending order", () => {
+  it("returns an error if no published projects are available", () => {
+    const projects = [
+      createProject("proj1", "Project 1", "other", "2022-01-10", false),
+      createProject("proj2", "Project 2", "other", "2022-01-11", false),
+    ];
     const result = categorizeProjects(projects);
-    expect(result[0].date).toBe("2023-09-01"); // Latest date
-    expect(result[1].date).toBe("2023-08-01");
-    expect(result[2].date).toBe("2023-09-02");
+    expect(result.isErr()).toBe(true);
+    if (result.isErr()) {
+      expect(result.error.name).toBe("NO_PUBLISHED_PROJECTS");
+    }
   });
 
-  it("sorts projects with the same date by display priority", () => {
-    const sameDateProjects: Project[] = [
-      {
-        mdx: "content1",
-        slug: "proj-1",
-        contentType: "project",
-        content: "content",
-        title: "Project 1",
-        description: "Same date test 1",
-        tech: ["React"],
-        published: true,
-        date: "2023-09-01",
-        display: "top2",
-        _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-      },
-      {
-        mdx: "content2",
-        slug: "proj-2",
-        contentType: "project",
-        content: "content",
-        title: "Project 2",
-        description: "Same date test 2",
-        tech: ["Vue"],
-        published: true,
-        date: "2023-09-01",
-        display: "featured",
-        _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-      },
-      {
-        mdx: "content3",
-        slug: "proj-3",
-        contentType: "project",
-        content: "content",
-        title: "Project 3",
-        description: "Same date test 3",
-        tech: ["Svelte"],
-        published: true,
-        date: "2023-09-01",
-        display: "top3",
-        _meta: { directory: "", extension: "", fileName: "", filePath: "", path: "" },
-      },
+  it("correctly categorizes projects by priority and date", () => {
+    const projects = [
+      createProject("proj-featured", "Featured Project", "featured", "2022-04-01"),
+      createProject("proj-top2", "Top 2 Project", "top2", "2022-03-15"),
+      createProject("proj-top3", "Top 3 Project", "top3", "2022-03-01"),
+      createProject("proj-other1", "Other Project 1", "other", "2021-12-01"),
+      createProject("proj-other2", "Other Project 2", "other", "2022-02-01"),
     ];
 
-    const result = categorizeProjects(sameDateProjects);
-    expect(result[0].display).toBe("featured"); // Highest priority
-    expect(result[1].display).toBe("top2");
-    expect(result[2].display).toBe("top3");
+    const result = categorizeProjects(projects);
+    expect(result.isOk()).toBe(true);
+    if (result.isOk()) {
+      const { featured, top2, top3, otherProjects } = result.value;
+      expect(featured?.title).toBe("Featured Project");
+      expect(top2?.title).toBe("Top 2 Project");
+      expect(top3?.title).toBe("Top 3 Project");
+      // Other projects should include other 2 projects sorted by date
+      expect(otherProjects.length).toBe(2);
+      // The "other" projects are sorted by date descending, 
+      // so "Other Project 2" (2022-02-01) should come before "Other Project 1" (2021-12-01)
+      expect(otherProjects[0].title).toBe("Other Project 2");
+      expect(otherProjects[1].title).toBe("Other Project 1");
+    }
   });
 
-  it("returns an empty array when input is null or undefined", () => {
-    expect(categorizeProjects(null as any)).toEqual([]);
-    expect(categorizeProjects(undefined as any)).toEqual([]);
+  it("handles cases where there are fewer than three top projects", () => {
+    const projects = [
+      createProject("proj-featured", "Featured Project", "featured", "2022-04-01"),
+      createProject("proj-top2", "Top 2 Project", "top2", "2022-03-15"),
+    ];
+
+    const result = categorizeProjects(projects);
+    expect(result.isOk()).toBe(true);
+    if (result.isOk()) {
+      const { featured, top2, top3, otherProjects } = result.value;
+      expect(featured?.title).toBe("Featured Project");
+      expect(top2?.title).toBe("Top 2 Project");
+      expect(top3).toBeUndefined(); // No third project
+      expect(otherProjects.length).toBe(0);
+    }
+  });
+
+  it("prioritizes by sortOrder over date", () => {
+    const projects = [
+      createProject("old-featured", "Old Featured", "featured", "2020-01-01"),
+      createProject("new-top2", "Newer Top2", "top2", "2022-01-01"),
+      createProject("old-top2", "Older Top2", "top2", "2021-01-01"),
+      createProject("another-other", "Another Other", "other", "2022-05-01"),
+    ];
+
+    // Since featured is higher priority than top2, the featured project 
+    // should always appear first, even if it's older.
+    const result = categorizeProjects(projects);
+    expect(result.isOk()).toBe(true);
+    if (result.isOk()) {
+      const { featured, top2, otherProjects } = result.value;
+      expect(featured?.title).toBe("Old Featured");
+      expect(top2?.title).toBe("Newer Top2");
+      // The next top project is the older Top2
+      expect(result.value.top3?.title).toBe("Older Top2");
+      // "Another Other" goes into otherProjects
+      expect(otherProjects.length).toBe(0);
+    }
   });
 });

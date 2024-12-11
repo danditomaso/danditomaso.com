@@ -13,10 +13,7 @@ function Navigation() {
       <ul className="flex flex-col items-center justify-center gap-12">
         {navigation.map((item) => (
           <li key={item.href}>
-            <Link
-              href={item.href}
-              className="text-[15vw] md:text-[10vw] font-display leading-none"
-            >
+            <Link href={item.href} className="text-[15vw] md:text-[10vw] font-display leading-none">
               <span className="relative inline-block group">
                 {item.name}
                 <span className="absolute left-1/2 bottom-0 w-0 h-[2px] bg-current transition-all duration-200 ease-out group-hover:w-full group-hover:left-0" />

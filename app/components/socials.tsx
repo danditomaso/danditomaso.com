@@ -1,5 +1,5 @@
 import { FaEnvelope, FaGithub, FaTwitter } from "react-icons/fa";
-import { FaBluesky } from 'react-icons/fa6';
+import { FaBluesky } from "react-icons/fa6";
 import { Card } from "./card";
 import Link from "./link";
 

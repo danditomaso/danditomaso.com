@@ -1,9 +1,9 @@
 import "../global.css";
 import type { Metadata } from "next";
+import { ViewTransitions } from "next-view-transitions";
 import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Analytics } from "./components/analytics/tracking";
-import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
   title: {
@@ -51,7 +51,7 @@ const inter = Inter({
 });
 
 const calSans = LocalFont({
-  src: "../public/fonts/CalSans-SemiBold.ttf",
+  src: "../public/fonts/CalSans-SemiBold.woff2",
   variable: "--font-calsans",
 });
 
