@@ -6,12 +6,11 @@ import { Analytics } from "./components/analytics/tracking";
 import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://danditomaso.com'),
   title: {
     default: "Dan Ditomaso",
     template: "%s | danditomaso.com",
   },
-  description: "Building pixel-perfect delightful user experiences.",
+  description: "Building pixel-perfect, engaging, and delightful user experiences.",
   openGraph: {
     title: "danditomaso.com",
     description: "Building pixel-perfect, engaging, and delightful user experiences.",
@@ -33,6 +32,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   twitter: {
@@ -43,7 +45,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
   },
 };
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",

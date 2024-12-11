@@ -52,7 +52,7 @@ export function Header({ project, views }: Props) {
       >
         <div className="max-w-7xl flex flex-row-reverse items-center justify-between p-6 mx-auto">
           <div className="flex justify-between gap-8">
-            {/* <span
+            <span
               title="View counter for this page"
               className={`duration-200 hover:font-medium flex items-center gap-1 ${isIntersecting
                 ? " text-slate-400 hover:text-slate-100"
@@ -63,7 +63,7 @@ export function Header({ project, views }: Props) {
               <span className="pointer-events-none">
                 {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
               </span>
-            </span> */}
+            </span>
             <Link href="https://twitter.com/danditomaso">
               <FaTwitter
                 className={`size-6 duration-200 hover:font-medium ${isIntersecting

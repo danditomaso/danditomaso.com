@@ -1,14 +1,13 @@
+import { withContentCollections } from "@content-collections/next";
 import bundleAnalyzer from "@next/bundle-analyzer";
-import createMDX from '@next/mdx';
-import { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  pageExtensions: ['mdx', 'ts', 'tsx'],
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   images: {
     domains: ["danditomaso.com"],
   },
   // redirect bots back to home page
-
   redirects: async () => {
     return [
       {
@@ -37,8 +36,4 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-const withMDX = createMDX({
-  extension: /\.mdx?$/,
-});
-
-export default withMDX(withBundleAnalyzer(nextConfig));
+export default withContentCollections(withBundleAnalyzer(nextConfig));
