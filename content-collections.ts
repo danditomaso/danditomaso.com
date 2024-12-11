@@ -12,12 +12,12 @@ const projects = defineCollection({
   schema: (z) => ({
     title: z.string(),
     description: z.string(),
-    published: z.boolean().optional(),
-    date: z.string().optional(),
+    published: z.boolean(),
+    date: z.string(),
+    tech: z.array(z.string()),
     url: z.string().optional(),
     repository: z.string().optional(),
-    tech: z.array(z.string()),
-    display: z.enum(["featured", "top3", "top2"]).optional(),
+    sortOrder: z.enum(["featured", "top2", "top3", "other"]),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {

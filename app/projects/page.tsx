@@ -44,7 +44,7 @@ export default async function ProjectsPage() {
         <div className="max-w-xl">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-100">Projects</h2>
           <p className="mt-4 text-slate-400">
-            Some of the projects are from work and some are on my own time.
+            Some of the projects I've been working on.
           </p>
         </div>
         <div className="w-full h-px bg-slate-800" />
@@ -56,15 +56,11 @@ export default async function ProjectsPage() {
                 <>
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-xs  text-slate-100">
-                      {featured.date ? (
-                        <time dateTime={new Date(featured.date).toISOString()}>
-                          {Intl.DateTimeFormat(undefined, {
-                            dateStyle: "medium",
-                          }).format(new Date(featured.date))}
-                        </time>
-                      ) : (
-                        <span>COMING SOON</span>
-                      )}
+                      <time dateTime={new Date(featured.date).toISOString()}>
+                        {Intl.DateTimeFormat(undefined, {
+                          dateStyle: "medium",
+                        }).format(new Date(featured.date))}
+                      </time>
                     </div>
                     <span className="flex items-center gap-2 text-xs text-slate-200">
                       <HiOutlineEye className="size-5" />
