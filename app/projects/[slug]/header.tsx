@@ -1,7 +1,6 @@
 "use client";
 import Link from "@/app/components/link";
 import { TechList } from "@/app/components/tech-list";
-import { Project } from "@/entities/project";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaTwitter } from "react-icons/fa";
