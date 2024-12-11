@@ -1,9 +1,9 @@
 import { withContentCollections } from "@content-collections/next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { NextConfig } from "next";
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+const nextConfig: NextConfig = {
+  pageExtensions: ["tsx", "mdx"],
   images: {
     domains: ["danditomaso.com"],
   },

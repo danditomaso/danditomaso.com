@@ -1,41 +1,51 @@
+import React, { ComponentPropsWithoutRef } from 'react';
 import { useMDXComponent } from "@content-collections/mdx/react";
-import clsx from "clsx";
-import Image from "next/image";
-import type { ImageProps } from "next/image";
-import Link from "../components/link";
-import React from "react";
-import type { ComponentPropsWithoutRef, DetailedHTMLProps, HTMLAttributeAnchorTarget } from "react";
+import { Link } from 'next-view-transitions';
 
-type HeadingProps = ComponentPropsWithoutRef<"h1">;
-type ParagraphProps = ComponentPropsWithoutRef<"p">;
-type ListProps = ComponentPropsWithoutRef<"ul">;
-type ListItemProps = ComponentPropsWithoutRef<"li">;
-type AnchorProps = ComponentPropsWithoutRef<"a">
-type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
+type HeadingProps = ComponentPropsWithoutRef<'h1'>;
+type ParagraphProps = ComponentPropsWithoutRef<'p'>;
+type ListProps = ComponentPropsWithoutRef<'ul'>;
+type ListItemProps = ComponentPropsWithoutRef<'li'>;
+type AnchorProps = ComponentPropsWithoutRef<'a'>;
+type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 
-const MdxComponents = {
-  h1: (props: HeadingProps) => <h1 className="font-medium pt-12 mb-0 fade-in" {...props} />,
-  h2: (props: HeadingProps) => <h2 className="text-gray-800 font-medium mt-8 mb-3" {...props} />,
-  h3: (props: HeadingProps) => <h3 className="text-gray-800 font-medium mt-8 mb-3" {...props} />,
-  h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
-  p: (props: ParagraphProps) => <p className="text-gray-800 leading-snug" {...props} />,
-  ol: (props: ListProps) => <ol className="text-gray-800 list-decimal pl-5 space-y-2" {...props} />,
-  ul: (props: ListProps) => <ul className="text-gray-800 list-disc pl-5 space-y-1" {...props} />,
-  li: (props: ListItemProps) => <li className="pl-1" {...props} />,
-  em: (props: ComponentPropsWithoutRef<"em">) => <em className="font-medium" {...props} />,
-  strong: (props: ComponentPropsWithoutRef<"strong">) => (
+const components = {
+  h1: (props: HeadingProps) => (
+    <h1 className="mt-10 fluid-3xl font-bold tracking-tighter font-display" {...props} />
+  ),
+  h2: (props: HeadingProps) => (
+    <h2 className="mt-8 fluid-2xl font-semibold tracking-tight font-display first:mt-0" {...props} />
+  ),
+  h3: (props: HeadingProps) => (
+    <h3 className="mt-8 text-xl font-semibold tracking-tight font-display" {...props} />
+  ),
+  h4: (props: HeadingProps) => <h4 className="mt-8 text-xl font-semibold tracking-tight font-display" {...props} />,
+  p: (props: ParagraphProps) => (
+    <p className="fluid-base mt-4 text-slate-900 [&:not(:first-child)]:mt-6"{...props} />
+  ),
+  ol: (props: ListProps) => (
+    <ol className="my-6 ml-6 list-decimal"{...props} />
+  ),
+  ul: (props: ListProps) => (
+    <ul className="text-gray-800 list-disc pl-5 space-y-1" {...props} />
+  ),
+  li: (props: ListItemProps) => <li className="mt-2" {...props} />,
+  em: (props: ComponentPropsWithoutRef<'em'>) => (
+    <em className="font-medium" {...props} />
+  ),
+  strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-medium" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
-    const className = "text-blue-500 hover:text-blue-700";
-    if (href?.startsWith("/")) {
+    const className = 'text-blue-500 hover:text-blue-700 font-medium underline underline-offset-4';
+    if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
           {children}
         </Link>
       );
     }
-    if (href?.startsWith("#")) {
+    if (href?.startsWith('#')) {
       return (
         <a href={href} className={className} {...props}>
           {children}
@@ -43,33 +53,41 @@ const MdxComponents = {
       );
     }
     return (
-      <a href={href} rel="noopener noreferrer" className={className} {...props}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        {...props}
+      >
         {children}
       </a>
     );
   },
-  blockquote: (props: BlockquoteProps) => (
-    <blockquote className="ml-[0.075em] border-l-3 border-gray-300 pl-4 text-gray-700" {...props} />
+  Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
+    <table>
+      <thead>
+        <tr>
+          {data.headers.map((header, index) => (
+            <th key={index}>{header}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.rows.map((row, index) => (
+          <tr key={index}>
+            {row.map((cell, cellIndex) => (
+              <td key={cellIndex}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   ),
-  Image: (props: ImageProps) =>
-    props.width || props.fill ? (
-      <Image
-        {...props}
-        placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+e1bKQAJMQNc5W2CQwAAAABJRU5ErkJggg=="
-      />
-    ) : (
-      <Image
-        {...props}
-        placeholder="blur"
-        width={1920}
-        height={1080}
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+e1bKQAJMQNc5W2CQwAAAABJRU5ErkJggg=="
-      />
-    ),
-  img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // biome-ignore lint/a11y/useAltText: alt text prop is present, biome is being a pain.
-    <img className={clsx("rounded-md border border-slate-200", className)} alt={alt} {...props} />
+  blockquote: (props: BlockquoteProps) => (
+    <blockquote
+      className="mt-6 border-l-2 border-300 pl-6 italic text-800 [&>*]:text-600" {...props}
+    />
   ),
 };
 
@@ -82,7 +100,7 @@ export function MDX({ code }: MDXProps) {
   return (
     <Component
       components={{
-        ...MdxComponents,
+        ...components,
       }}
     />
   );

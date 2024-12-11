@@ -33,7 +33,7 @@ export function categorizeProjects(projects: Project[]): Result<CategorizedProje
         top3: 3,
         other: 4,
       };
-      return priority[a.display ?? "other"] - priority[b.display ?? "other"];
+      return priority[a.sortOrder ?? "other"] - priority[b.sortOrder ?? "other"];
     });
   const featuredProjects = allProjects?.slice(0, 3) ?? [];
 

@@ -6,8 +6,6 @@ import { MDX } from "@/app/components/mdx-content";
 import { RedisClient } from "@/service/redis";
 import { allProjects } from "content-collections";
 
-export const revalidate = 60;
-
 type Props = {
   params: Promise<{
     slug: string;
@@ -32,7 +30,6 @@ export default async function PostPage(props: Props) {
       <Header project={project} views={views} />
       <ViewCounter slug={project.slug} />
 
-      {/* <article className="px-4 py-12 min-w-7xl mx-auto prose prose-slate prose-quoteless"> */}
       <article className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-16 md:space-y-16 md:pt-24 lg:pt-32">
         <MDX code={project.mdx} />
       </article>

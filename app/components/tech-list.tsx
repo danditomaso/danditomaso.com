@@ -10,11 +10,11 @@ import {
   BiLogoTailwindCss,
   BiLogoTypescript,
 } from "react-icons/bi";
+import { FaGolang } from "react-icons/fa6";
 import {
   SiBun,
   SiCloudflare,
   SiDeno,
-  SiFigma,
   SiHono,
   SiNextdotjs,
   SiRedis,
@@ -39,6 +39,7 @@ export function TechList({ techUsed, className }: { techUsed: string[]; classNam
     node: { label: "Node.js", icon: <BiLogoNodejs /> },
     deno: { label: "Deno", icon: <SiDeno size={12} /> },
     next: { label: "Next.js", icon: <SiNextdotjs size="12" /> },
+    go: { label: "Go", icon: <FaGolang size="24" /> },
     react: { label: "React", icon: <BiLogoReact /> },
     remix: { label: "Remix", icon: <SiRemix size="12" /> },
     hono: { label: "Hono.js", icon: <SiHono size="12" /> },
