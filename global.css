@@ -4,18 +4,21 @@
 
 
 body {
-  background: #000
-}
-
-
-
-@layer base {
-
-  .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-  }
+  background: #000;
 }
 
 @view-transition {
   navigation: auto;
+}
+
+.transition-heading {
+  view-transition-name: heading;
+}
+
+::view-transition-old(heading) {
+  @apply animate-fade-out
+}
+
+::view-transition-new(heading) {
+  @apply animate-fade-in
 }

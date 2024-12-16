@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
+import type { Project, SortOrder } from "@/entities/project";
+import { describe, expect, it } from "vitest";
 import { categorizeProjects } from "./projects";
-import { Project, SortOrder } from "@/entities/project";
 
 const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
   mdx: "",
@@ -8,8 +8,9 @@ const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
   content: "",
   description: "A test project",
   tech: ["TypeScript", "React"],
-  published: true,
-  date: "2022-01-01",
+  draft: false,
+  keywords: ["test", "project"],
+  publishDate: "2022-01-01",
   url: "https://example.com",
   repository: "https://example.com/repo",
   _meta: {
@@ -18,23 +19,23 @@ const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
     fileName: "test-project.mdx",
     filePath: "/projects/test-project.mdx",
     path: "/projects/test-project.mdx",
-  }
+  },
 };
 
 function createProject(
   slug: string,
   title: string,
   sortOrder: SortOrder,
-  date: string = "2022-01-01",
-  published: boolean = true,
+  publishDate = "2022-01-01",
+  draft = false,
 ): Project {
   return {
     ...baseProject,
     slug,
     title,
     sortOrder,
-    date,
-    published,
+    publishDate,
+    draft,
   };
 }
 
@@ -47,10 +48,10 @@ describe("categorizeProjects", () => {
     }
   });
 
-  it("returns an error if no published projects are available", () => {
+  it("returns an error if only draft projects are available", () => {
     const projects = [
-      createProject("proj1", "Project 1", "other", "2022-01-10", false),
-      createProject("proj2", "Project 2", "other", "2022-01-11", false),
+      createProject("proj1", "Project 1", "other", "2022-01-10", true),
+      createProject("proj2", "Project 2", "other", "2022-01-11", true),
     ];
     const result = categorizeProjects(projects);
     expect(result.isErr()).toBe(true);
@@ -59,7 +60,7 @@ describe("categorizeProjects", () => {
     }
   });
 
-  it("correctly categorizes projects by priority and date", () => {
+  it("correctly categorizes projects by priority and publishDate", () => {
     const projects = [
       createProject("proj-featured", "Featured Project", "featured", "2022-04-01"),
       createProject("proj-top2", "Top 2 Project", "top2", "2022-03-15"),
@@ -75,9 +76,9 @@ describe("categorizeProjects", () => {
       expect(featured?.title).toBe("Featured Project");
       expect(top2?.title).toBe("Top 2 Project");
       expect(top3?.title).toBe("Top 3 Project");
-      // Other projects should include other 2 projects sorted by date
+      // Other projects should include other 2 projects sorted bypublishDate
       expect(otherProjects.length).toBe(2);
-      // The "other" projects are sorted by date descending, 
+      // The "other" projects are sorted by publishDate descending,
       // so "Other Project 2" (2022-02-01) should come before "Other Project 1" (2021-12-01)
       expect(otherProjects[0].title).toBe("Other Project 2");
       expect(otherProjects[1].title).toBe("Other Project 1");
@@ -101,7 +102,7 @@ describe("categorizeProjects", () => {
     }
   });
 
-  it("prioritizes by sortOrder over date", () => {
+  it("prioritizes by sortOrder over publishDate", () => {
     const projects = [
       createProject("old-featured", "Old Featured", "featured", "2020-01-01"),
       createProject("new-top2", "Newer Top2", "top2", "2022-01-01"),
@@ -109,7 +110,7 @@ describe("categorizeProjects", () => {
       createProject("another-other", "Another Other", "other", "2022-05-01"),
     ];
 
-    // Since featured is higher priority than top2, the featured project 
+    // Since featured is higher priority than top2, the featured project
     // should always appear first, even if it's older.
     const result = categorizeProjects(projects);
     expect(result.isOk()).toBe(true);
@@ -120,7 +121,7 @@ describe("categorizeProjects", () => {
       // The next top project is the older Top2
       expect(result.value.top3?.title).toBe("Older Top2");
       // "Another Other" goes into otherProjects
-      expect(otherProjects.length).toBe(0);
+      expect(otherProjects.length).toBe(1);
     }
   });
 });

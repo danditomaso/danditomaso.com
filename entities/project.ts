@@ -1,4 +1,4 @@
-import { Meta } from "@content-collections/core";
+import type { Meta } from "@content-collections/core";
 
 export type SortOrder = "featured" | "top2" | "top3" | "other";
 
@@ -17,4 +17,4 @@ export type Project = {
   repository?: string;
   sortOrder: SortOrder; // Always one of the defined SortOrder values
   _meta: Meta;
-}
+};

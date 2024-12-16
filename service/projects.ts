@@ -1,6 +1,6 @@
-import { ContentError } from "@/app/errors";
-import { Project, SortOrder } from "@/entities/project";
+import type { Project, SortOrder } from "@/entities/project";
 import { type Result, err, ok } from "neverthrow";
+import { ContentError } from "../app/errors";
 
 export interface CategorizedProjects {
   featured: Project;
@@ -8,7 +8,6 @@ export interface CategorizedProjects {
   top3: Project;
   otherProjects: Project[];
 }
-
 
 export function categorizeProjects(projects: Project[]): Result<CategorizedProjects, ContentError> {
   if (!projects || projects.length === 0) {
