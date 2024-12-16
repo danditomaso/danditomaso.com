@@ -1,14 +1,14 @@
 "use client";
 import Link from "@/app/components/link";
 import { TechList } from "@/app/components/tech-list";
-import { Project } from "@/entities/project";
+import type { Project } from "@/entities/project";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight, HiOutlineEye } from "react-icons/hi";
 
 type Props = {
-  project: Pick<Project, "title" | "description" | "url" | "repository" | "tech">;
+  project: Pick<Project, "slug" | "title" | "description" | "url" | "repository" | "tech">;
   views: number;
 };
 
@@ -42,19 +42,21 @@ export function Header({ project, views }: Props) {
   return (
     <header ref={ref} className="bg-gradient-to-tl from-black via-slate-900 to-black">
       <div
-        className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${isIntersecting
-          ? "bg-slate-800/0 border-transparent"
-          : "bg-white/10  border-slate-200 lg:border-transparent"
-          }`}
+        className={`transition-heading fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
+          isIntersecting
+            ? "bg-slate-800/0 border-transparent"
+            : "bg-white/10  border-slate-200 lg:border-transparent"
+        }`}
       >
         <div className="max-w-7xl flex flex-row-reverse items-center justify-between p-6 mx-auto">
           <div className="flex justify-between gap-8">
             <span
               title="View counter for this page"
-              className={`duration-200 hover:font-medium flex items-center gap-1 ${isIntersecting
-                ? " text-slate-400 hover:text-slate-100"
-                : "text-slate-600 hover:text-slate-900"
-                } `}
+              className={`duration-200 hover:font-medium flex items-center gap-1 ${
+                isIntersecting
+                  ? " text-slate-400 hover:text-slate-100"
+                  : "text-slate-600 hover:text-slate-900"
+              } `}
             >
               <HiOutlineEye className="w-5 h-5" />{" "}
               <span className="pointer-events-none">
@@ -63,28 +65,31 @@ export function Header({ project, views }: Props) {
             </span>
             <Link href="https://twitter.com/danditomaso">
               <FaTwitter
-                className={`size-6 duration-200 hover:font-medium ${isIntersecting
-                  ? " text-slate-400 hover:text-slate-100"
-                  : "text-slate-600 hover:text-slate-900"
-                  } `}
+                className={`size-6 duration-200 hover:font-medium ${
+                  isIntersecting
+                    ? " text-slate-400 hover:text-slate-100"
+                    : "text-slate-600 hover:text-slate-900"
+                } `}
               />
             </Link>
             <Link href="https://github.com/danditomaso">
               <FaGithub
-                className={`size-6 duration-200 hover:font-medium ${isIntersecting
-                  ? " text-slate-400 hover:text-slate-100"
-                  : "text-slate-600 hover:text-slate-900"
-                  } `}
+                className={`size-6 duration-200 hover:font-medium ${
+                  isIntersecting
+                    ? " text-slate-400 hover:text-slate-100"
+                    : "text-slate-600 hover:text-slate-900"
+                } `}
               />
             </Link>
           </div>
 
           <Link
             href="/projects"
-            className={`duration-200 hover:font-medium ${isIntersecting
-              ? " text-slate-400 hover:text-slate-100"
-              : "text-slate-600 hover:text-slate-900"
-              } `}
+            className={`duration-200 hover:font-medium ${
+              isIntersecting
+                ? " text-slate-400 hover:text-slate-100"
+                : "text-slate-600 hover:text-slate-900"
+            } `}
           >
             <HiArrowLeft className="size-6" />
           </Link>
@@ -93,9 +98,9 @@ export function Header({ project, views }: Props) {
       <div className="min-w-7xl mx-auto container flex flex-col place-content-center place-items-center relative  px-6 lg:px-8 py-24 sm:py-32">
         <div className="flex flex-col max-w-[80ch]  lg:mx-0">
           <div className="text-center">
-            <h1 className="fluid-5xl font-bold tracking-tight text-white font-display">
+            <h2 className="fluid-5xl font-bold tracking-tight text-white font-display">
               {project.title}
-            </h1>
+            </h2>
             <p className="fluid-base mt-4 text-slate-300">{project.description}</p>
           </div>
 

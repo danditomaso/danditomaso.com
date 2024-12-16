@@ -6,34 +6,12 @@ module.exports = {
 
   theme: {
     extend: {
-      typography: {
-        DEFAULT: {
-          css: {
-            maxWidth: "70ch",
-            "code::before": {
-              content: '""',
-            },
-            "code::after": {
-              content: '""',
-            },
-          },
-        },
-        quoteless: {
-          css: {
-            "blockquote p:first-of-type::before": { content: "none" },
-            "blockquote p:first-of-type::after": { content: "none" },
-          },
-        },
-      },
       letterSpacing: {
         widerest: "2px",
       },
       fontFamily: {
         sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
         display: ["var(--font-calsans)"],
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
         "fade-in": "fade-in 2s ease-in-out forwards",
@@ -51,6 +29,17 @@ module.exports = {
           },
           "100%": {
             opacity: "100%",
+          },
+        },
+        "fade-out": {
+          "0%": {
+            opacity: "100%",
+          },
+          "75%": {
+            opacity: "100%",
+          },
+          "100%": {
+            opacity: "0%",
           },
         },
         "fade-left": {
