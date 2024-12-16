@@ -4,7 +4,6 @@ import { categorizeProjects } from "./projects";
 
 const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
   mdx: "",
-  contentType: "project",
   content: "",
   description: "A test project",
   tech: ["TypeScript", "React"],

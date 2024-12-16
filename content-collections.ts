@@ -4,8 +4,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
-export const projects = defineCollection({
-  name: "projects",
+export const mdxProjects = defineCollection({
+  name: "mdxProjects",
   directory: "./content/projects",
   include: "**/*.mdx",
   schema: (z) => ({
@@ -63,5 +63,5 @@ export const projects = defineCollection({
 });
 
 export default defineConfig({
-  collections: [projects],
+  collections: [mdxProjects],
 });

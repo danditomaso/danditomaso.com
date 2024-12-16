@@ -5,7 +5,7 @@ import { ViewCounter } from "@/app/components/analytics/view-count";
 import { MDX } from "@/app/components/mdx-content";
 import { getProjectBySlug } from "@/service/projects";
 import { RedisClient } from "@/service/redis";
-import { allProjects } from "content-collections";
+import { allMdxProjects } from "content-collections";
 
 type Props = {
   params: Promise<{
@@ -18,7 +18,7 @@ const redis = new RedisClient();
 export default async function PostPage(props: Props) {
   const params = await props.params;
   const slug = params?.slug;
-  const project = getProjectBySlug(slug, allProjects);
+  const project = getProjectBySlug(slug, allMdxProjects);
 
   if (project.isErr()) {
     return notFound();

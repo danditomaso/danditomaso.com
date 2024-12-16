@@ -1,7 +1,7 @@
 import Link from "@/app/components/link";
 import { categorizeProjects } from "@/service/projects";
 import { Redis } from "@upstash/redis";
-import { allProjects } from "content-collections";
+import { allMdxProjects } from "content-collections";
 import React from "react";
 import { HiArrowRight, HiOutlineEye } from "react-icons/hi";
 import { Card } from "../components/card";
@@ -17,17 +17,17 @@ const redis = Redis.fromEnv();
 export default async function ProjectsPage() {
   const views = (
     await redis.mget<number[]>(
-      ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
+      ...allMdxProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
     )
   ).reduce(
     (acc, v, i) => {
-      acc[allProjects[i].slug] = v ?? 0;
+      acc[allMdxProjects[i].slug] = v ?? 0;
       return acc;
     },
     {} as Record<string, number>,
   );
 
-  const result = categorizeProjects(allProjects);
+  const result = categorizeProjects(allMdxProjects);
 
   if (result.isErr()) {
     throw new ContentError({

@@ -1,7 +1,7 @@
 import Link from "@/app/components/link";
-import type { Project } from "content-collections";
 import { HiOutlineEye } from "react-icons/hi";
 import { TechList } from "../components/tech-list";
+import { Project } from "@/entities/project";
 
 type Props = {
   project: Project;
