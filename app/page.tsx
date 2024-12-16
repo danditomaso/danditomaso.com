@@ -34,13 +34,13 @@ function Header() {
       </h1>
 
       <div className="animate-fade-in mt-3 tracking-widerest lg:max-w-[38ch] text-balance">
-        <h2 className="text-md tracking-widerest text-white">Full Stack Developer</h2>
+        <h2 className="text-md tracking-wider text-white">Full Stack Developer</h2>
         <h3 className="text-md font-light leading-normal mt-4 text-slate-400 tracking-widest">
           I'm a full stack developer with a{" "}
           <Link href="/projects" className="underline">
             focus
           </Link>{" "}
-          building on pixel-perfect, engaging, and delightful front-end experiences.
+          building on pixel-perfect, engaging front-end experiences.
         </h3>
       </div>
     </header>

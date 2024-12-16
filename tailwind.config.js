@@ -13,6 +13,10 @@ module.exports = {
         sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
         display: ["var(--font-calsans)"],
       },
+      gridTemplateColumns: {
+        'auto-fit': 'repeat(auto-fit, minmax(150px, 1fr))',
+        'auto-fill': 'repeat(auto-fill, minmax(150px, 1fr))',
+      },
       animation: {
         "fade-in": "fade-in 1.25s ease-in-out forwards",
         "fade-out": "fade-out 1.25s ease-in-out forwards",

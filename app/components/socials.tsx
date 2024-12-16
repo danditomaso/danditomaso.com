@@ -5,12 +5,12 @@ import Link from "./link";
 
 export async function Socials() {
   const socials = [
-    {
-      icon: <FaBluesky size={20} />,
-      href: "https://bky.app/profile/dand.me",
-      label: "Bluesky",
-      handle: "@dand.me",
-    },
+    // {
+    //   icon: <FaBluesky size={20} />,
+    //   href: "https://bky.app/profile/dand.me",
+    //   label: "Bluesky",
+    //   handle: "@dand.me",
+    // },
     {
       icon: <FaEnvelope size={20} />,
       href: "mailto:dan.ditomaso@gmail.com?subject=Inquiry From Portfolio",
@@ -30,12 +30,13 @@ export async function Socials() {
   }
 
   return (
-    <div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-8">
+    <div className="grid w-full grid-cols-auto-fit gap-8 mx-auto mt-32 sm:mt-0 lg:gap-8">
       {socials.map((s) => (
-        <Card key={s.href}>
+        <Card key={s.href} className="min-w-full">
           <Link
             href={s.href}
             className="p-16 relative flex flex-col items-center gap-4 md:gap-8 py-24 md:p-16 duration-700 group md:py-24 lg:pb-48"
+            target="_blank"
           >
             <span
               className="absolute w-px h-2/3 bg-gradient-to-b from-slate-500 via-slate-500/50 to-transparent"
