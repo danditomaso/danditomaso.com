@@ -29,7 +29,7 @@ export function categorizeProjects(projects: Project[]): Result<CategorizedProje
   };
 
   const sortedProjects = projects
-    .filter((p) => p.published) // Include only published projects
+    .filter((p) => !p.draft) // Include only projects in published state
     .sort((a, b) => {
       // Primary sort by sortOrder priority
       const priorityDiff = priority[a.sortOrder as SortOrder] - priority[b.sortOrder as SortOrder];
@@ -38,7 +38,7 @@ export function categorizeProjects(projects: Project[]): Result<CategorizedProje
       }
 
       // Secondary sort by date (most recent first)
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+      return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
     });
 
   if (sortedProjects.length === 0) {

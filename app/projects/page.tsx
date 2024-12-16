@@ -49,17 +49,17 @@ export default async function ProjectsPage() {
         </div>
         <div className="w-full h-px bg-slate-800" />
 
-        <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
+        <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2">
           <Card>
             <Link href={`/projects/${featured?.slug}`}>
-              <article className="flex flex-col gap-4 p-4 h-full md:p-8">
+              <article className="flex flex-col gap-4 p-4 h-full md:p-8 transition-heading">
                 <>
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-xs  text-slate-100">
-                      <time dateTime={new Date(featured.date).toISOString()}>
+                      <time dateTime={new Date(featured.publishDate).toISOString()}>
                         {Intl.DateTimeFormat(undefined, {
                           dateStyle: "medium",
-                        }).format(new Date(featured.date))}
+                        }).format(new Date(featured.publishDate))}
                       </time>
                     </div>
                     <span className="flex items-center gap-2 text-xs text-slate-200">

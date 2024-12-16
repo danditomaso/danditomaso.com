@@ -18,15 +18,11 @@ export function Article({ project, views }: Props) {
       <article className="p-4 md:p-8">
         <div className="flex justify-between gap-3 items-center">
           <span className="text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200">
-            {project.date ? (
-              <time dateTime={new Date(project.date).toISOString()}>
-                {Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
-                  new Date(project.date),
-                )}
-              </time>
-            ) : (
-              <span>COMING SOON</span>
-            )}
+            <time dateTime={new Date(project.publishDate).toISOString()}>
+              {Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
+                new Date(project.publishDate),
+              )}
+            </time>
           </span>
           <span className="text-slate-200 text-xs flex items-center gap-2">
             <HiOutlineEye className="size-5" />{" "}

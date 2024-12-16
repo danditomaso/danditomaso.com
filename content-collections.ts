@@ -1,19 +1,19 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
-import { remarkGfm, remarkHeading, remarkStructure } from "fumadocs-core/mdx-plugins";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
-const projects = defineCollection({
+export const projects = defineCollection({
   name: "projects",
   directory: "./content/projects",
   include: "**/*.mdx",
   schema: (z) => ({
     title: z.string(),
     description: z.string(),
-    published: z.boolean(),
-    date: z.string(),
+    keywords: z.array(z.string()),
+    draft: z.boolean(),
+    publishDate: z.string(),
     tech: z.array(z.string()),
     url: z.string().optional(),
     repository: z.string().optional(),
@@ -21,7 +21,7 @@ const projects = defineCollection({
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
-      remarkPlugins: [remarkGfm, remarkHeading, remarkStructure],
+      remarkPlugins: [],
       rehypePlugins: [
         rehypeSlug,
         [
@@ -58,7 +58,6 @@ const projects = defineCollection({
       ...document,
       mdx,
       slug: document._meta.path,
-      contentType: "mdx",
     };
   },
 });
