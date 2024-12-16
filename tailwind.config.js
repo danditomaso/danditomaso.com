@@ -15,6 +15,7 @@ module.exports = {
       },
       animation: {
         "fade-in": "fade-in 2s ease-in-out forwards",
+        "fade-out": "fade-out 2s ease-in-out forwards",
         title: "title 2s ease-out forwards",
         "fade-left": "fade-left 2s ease-in-out forwards",
         "fade-right": "fade-right 2s ease-in-out forwards",

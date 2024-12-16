@@ -29,7 +29,7 @@ function Navigation() {
 function Header() {
   return (
     <header className="flex flex-col mt-[20%] my-6 lg:my-16 mx-16">
-      <h1 className="py-1 px-0.5 z-10 text-md tracking-[2px] uppercase font-light text-transparent duration-1000 bg-white cursor-default animate-title font-sans whitespace-nowrap bg-clip-text">
+      <h1 className="py-1 px-0.5 z-10 text-md tracking-[2px] uppercase font-light text-transparent duration-1000 bg-white cursor-default font-sans whitespace-nowrap bg-clip-text">
         Dan Ditomaso
       </h1>
 
