@@ -5,14 +5,14 @@ import type { Project } from "@/entities/project";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaTwitter } from "react-icons/fa";
-import { HiArrowLeft, HiArrowRight, HiOutlineEye } from "react-icons/hi";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 type Props = {
   project: Project;
   views: number;
 };
 
-export function Header({ project, views }: Props) {
+export function Header({ project }: Props) {
   const { meta } = project;
   const ref = useRef<HTMLElement>(null);
   const [isIntersecting, setIntersecting] = useState(true);
@@ -44,54 +44,49 @@ export function Header({ project, views }: Props) {
     <header ref={ref} className="bg-gradient-to-tl from-black via-slate-900 to-black">
       <div
         style={{ viewTimelineName: "heading" }}
-        className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
-          isIntersecting
-            ? "bg-slate-800/0 border-transparent"
-            : "bg-white/10  border-slate-200 lg:border-transparent"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${isIntersecting
+          ? "bg-slate-800/0 border-transparent"
+          : "bg-white/10  border-slate-200 lg:border-transparent"
+          }`}
       >
         <div className="max-w-7xl flex flex-row-reverse items-center justify-between p-6 mx-auto">
           <div className="flex justify-between gap-8">
-            <span
+            {/* <span
               title="View counter for this page"
-              className={`duration-200 hover:font-medium flex items-center gap-1 ${
-                isIntersecting
+              className={`duration-200 hover:font-medium flex items-center gap-1 ${isIntersecting
                   ? " text-slate-400 hover:text-slate-100"
                   : "text-slate-600 hover:text-slate-900"
-              } `}
+                } `}
             >
               <HiOutlineEye className="w-5 h-5" />{" "}
               <span className="pointer-events-none">
                 {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
               </span>
-            </span>
+            </span> */}
             <Link href="https://twitter.com/danditomaso">
               <FaTwitter
-                className={`size-6 duration-200 hover:font-medium ${
-                  isIntersecting
-                    ? " text-slate-400 hover:text-slate-100"
-                    : "text-slate-600 hover:text-slate-900"
-                } `}
+                className={`size-6 duration-200 hover:font-medium ${isIntersecting
+                  ? " text-slate-400 hover:text-slate-100"
+                  : "text-slate-600 hover:text-slate-900"
+                  } `}
               />
             </Link>
             <Link href="https://github.com/danditomaso">
               <FaGithub
-                className={`size-6 duration-200 hover:font-medium ${
-                  isIntersecting
-                    ? " text-slate-400 hover:text-slate-100"
-                    : "text-slate-600 hover:text-slate-900"
-                } `}
+                className={`size-6 duration-200 hover:font-medium ${isIntersecting
+                  ? " text-slate-400 hover:text-slate-100"
+                  : "text-slate-600 hover:text-slate-900"
+                  } `}
               />
             </Link>
           </div>
 
           <Link
             href="/projects"
-            className={`duration-200 hover:font-medium ${
-              isIntersecting
-                ? " text-slate-400 hover:text-slate-100"
-                : "text-slate-600 hover:text-slate-900"
-            } `}
+            className={`duration-200 hover:font-medium ${isIntersecting
+              ? " text-slate-400 hover:text-slate-100"
+              : "text-slate-600 hover:text-slate-900"
+              } `}
           >
             <HiArrowLeft className="size-6" />
           </Link>

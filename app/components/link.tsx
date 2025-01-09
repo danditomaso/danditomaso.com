@@ -1,5 +1,5 @@
 import { cn } from "@/util/style";
-import NextLink from "next/link";
+import { Link } from "next-view-transitions";
 import type { ComponentPropsWithoutRef } from "react";
 
 type LinkProps = {
@@ -8,20 +8,20 @@ type LinkProps = {
   className?: string;
 } & ComponentPropsWithoutRef<"a">;
 
-export default function _Link({
+export default function NextLink({
   href,
   children,
   className,
   ...props
 }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
-    <NextLink
+    <Link
       href={href}
       rel="noopener noreferrer"
       className={cn("duration-200 text-slate-400 hover:text-slate-100", className)}
       {...props}
     >
       {children}
-    </NextLink>
+    </Link>
   );
 }
