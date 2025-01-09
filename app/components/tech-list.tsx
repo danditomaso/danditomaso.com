@@ -75,7 +75,7 @@ export function TechList({ techUsed, className }: { techUsed: string[]; classNam
             {IconComponent ? (
               <>
                 <IconComponent />
-                {label}
+                <span className="text-xs">{label}</span>
               </>
             ) : (
               label

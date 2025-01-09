@@ -1,10 +1,10 @@
-import { formatDistanceToNow, parseISO } from 'date-fns';
+import { formatDistanceToNow, parseISO } from "date-fns";
 
 const formatPublishDate = (dateString: string): string => {
   const date = parseISO(dateString);
   const distance = formatDistanceToNow(date, {
     addSuffix: true,
-    includeSeconds: false
+    includeSeconds: false,
   });
 
   return distance;
@@ -14,7 +14,7 @@ const formatPublishDate = (dateString: string): string => {
 const TimeDisplay: React.FC<{ publishDate: string }> = ({ publishDate }) => {
   return (
     <time dateTime={new Date(publishDate).toISOString()}>
-      Last updated: {formatPublishDate(publishDate)}
+      Released: {formatPublishDate(publishDate)}
     </time>
   );
 };

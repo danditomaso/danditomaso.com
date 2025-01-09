@@ -1,39 +1,54 @@
 import Link from "@/app/components/link";
 import type { Project } from "@/entities/project";
+import { cn } from "@/util/style";
+import { HiArrowRight } from "react-icons/hi";
 import { TechList } from "../components/tech-list";
 import { TimeDisplay } from "../components/time";
 
-type Props = {
+type ArticleProps = {
   project: Project;
-  views: number;
+  children?: React.ReactNode;
 };
 
-export function Article({ project }: Props) {
+export function ReadMore() {
+  return (
+    <div className="mt-auto group pt-6">
+      <p className="flex items-center gap-2 text-slate-200 hover:text-slate-50">
+        Read more
+        <HiArrowRight className="size-5 duration-200 group-hover:translate-x-2" />
+      </p>
+    </div>
+  );
+}
+export function Article({ project, children }: ArticleProps) {
   if (!project) {
     return null;
   }
 
+  const { title, description, sortOrder, tech, publishDate, slug } = project.meta;
+
   return (
-    <Link href={`/projects/${project?.meta.slug}`}>
-      <article className="p-4 md:p-8">
+    <Link href={slug ?? ""}>
+      <article className="p-4 md:p-8 flex flex-col h-full">
         <div className="flex justify-between gap-3 items-center">
-          <span className="text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200">
-            <TimeDisplay publishDate={project.meta?.publishDate} />
+          <span className="-mb-2 text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200">
+            <TimeDisplay publishDate={publishDate} />
           </span>
-          {/* <span className="text-slate-200 text-xs flex items-center gap-2">
-            <HiOutlineEye className="size-5" />{" "}
-            {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
-          </span> */}
         </div>
-        <h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-slate-200 group-hover:text-white font-display">
-          {project.meta.title}
+        <h2
+          className={cn(
+            `z-20 mt-2 ${sortOrder === "featured" ? "text-3xl" : "text-xl"}  font-medium duration-1000 lg:text-3xl text-slate-200 group-hover:text-white font-display`,
+          )}
+        >
+          {title}
         </h2>
-        <p className="z-20 mt-4 text-sm  duration-1000 text-slate-400 group-hover:text-slate-200">
-          {project.meta.description}
+        <p className="z-20 mt-2 text-sm  duration-1000 text-slate-400 group-hover:text-slate-200">
+          {description}
         </p>
-        <div className="mt-4">
-          <TechList techUsed={project.meta.tech} />
+        <div className="pt-6">
+          <TechList techUsed={tech} />
         </div>
+        {children}
       </article>
     </Link>
   );

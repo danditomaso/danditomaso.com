@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
-import { Header } from "./header";
 import { components } from "@/mdx-components";
 import { getProjectBySlug, getProjectSlugs } from "@/service/projects";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
+import { Header } from "./header";
 
 type Props = {
   params: Promise<{
@@ -11,41 +11,45 @@ type Props = {
   }>;
 };
 
-export const metadata: Metadata = {
-  title: "Dan Ditomaso ",
-  openGraph: {
-    type: "website",
-  },
-  robots: {
-    follow: true,
-    index: true,
-  },
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug;
+  const project = getProjectBySlug(slug);
+
+  if (project.isErr()) {
+    return {};
+  }
+
+  const _project = project.value;
+  return {
+    title: `Dan Ditomaso | ${_project.meta.title}`,
+    description: _project.meta.description,
+  };
+}
 
 export async function generateStaticParams() {
-  const slugs = getProjectSlugs()
+  const slugs = getProjectSlugs();
 
   if (slugs.isErr()) {
     return notFound();
   }
-  const safeSlugs = slugs.value
+  const safeSlugs = slugs.value;
 
   return safeSlugs.map((s) => ({
-    slug: s
-  }))
+    slug: s,
+  }));
 }
 
 export default async function PostPage(props: Props) {
   const params = await props.params;
   const slug = params?.slug;
 
-  const post = getProjectBySlug(slug);
+  const project = getProjectBySlug(slug);
 
-  if (post.isErr()) {
+  if (project.isErr()) {
     return notFound();
   }
 
-  const _post = post.value;
+  const _post = project.value;
 
   return (
     <div className="bg-white min-h-screen">

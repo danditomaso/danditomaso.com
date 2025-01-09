@@ -77,7 +77,7 @@ const validateProjectData = (data: unknown, path: string): Result<ProjectMeta, C
     const validatedData = ProjectMetadataSchema.parse(data);
     return ok({
       ...validatedData,
-      slug: path.replace(/\.mdx$/, ""),
+      slug: `/projects/${path.replace(/\.mdx$/, "")}`,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {

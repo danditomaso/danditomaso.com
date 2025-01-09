@@ -1,15 +1,11 @@
 import "../global.css";
-import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
 import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Analytics } from "./components/analytics/tracking";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Dan Ditomaso",
-    template: "%s | danditomaso.com",
-  },
+export const metadata = {
+  title: "Dan Ditomaso",
   description: "Building pixel-perfect, engaging, and delightful user experiences.",
   openGraph: {
     title: "danditomaso.com",
@@ -25,6 +21,10 @@ export const metadata: Metadata = {
     ],
     locale: "en-US",
     type: "website",
+  },
+  authors: {
+    name: "Dan Ditomaso",
+    url: "https://github.com/",
   },
   robots: {
     index: true,
@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
   },
 };
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
