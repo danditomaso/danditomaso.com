@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
 import { Header } from "./header";
-import "./mdx.css";
-import { ViewCounter } from "@/app/components/analytics/view-count";
-import { MDX } from "@/app/components/mdx-content";
-import { getProjectBySlug } from "@/service/projects";
-import { RedisClient } from "@/service/redis";
-import { allMdxProjects } from "content-collections";
+import { components } from "@/mdx-components";
+import { getProjectBySlug, getProjectSlugs } from "@/service/projects";
+import type { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 type Props = {
   params: Promise<{
@@ -13,28 +11,47 @@ type Props = {
   }>;
 };
 
-const redis = new RedisClient();
+export const metadata: Metadata = {
+  title: "Dan Ditomaso ",
+  openGraph: {
+    type: "website",
+  },
+  robots: {
+    follow: true,
+    index: true,
+  },
+};
+
+export async function generateStaticParams() {
+  const slugs = getProjectSlugs()
+
+  if (slugs.isErr()) {
+    return notFound();
+  }
+  const safeSlugs = slugs.value
+
+  return safeSlugs.map((s) => ({
+    slug: s
+  }))
+}
 
 export default async function PostPage(props: Props) {
   const params = await props.params;
   const slug = params?.slug;
-  const project = getProjectBySlug(slug, allMdxProjects);
 
-  if (project.isErr()) {
+  const post = getProjectBySlug(slug);
+
+  if (post.isErr()) {
     return notFound();
   }
 
-  const _project = project.value;
-
-  const views = (await redis.get<number>(["pageviews", "projects", slug])) ?? 0;
+  const _post = post.value;
 
   return (
     <div className="bg-white min-h-screen">
-      <Header project={_project} views={views} />
-      <ViewCounter slug={_project.slug} />
-
-      <article className="px-6 pt-14 mx-auto space-y-8 max-w-7xl lg:px-16 md:space-y-16">
-        <MDX code={_project.mdx} />
+      <Header project={_post} views={0} />
+      <article className="px-6 pt-14 mx-auto max-w-7xl lg:px-16 pb-12">
+        <MDXRemote source={_post?.content} components={components} />
       </article>
     </div>
   );

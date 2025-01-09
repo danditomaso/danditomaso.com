@@ -1,19 +1,23 @@
-import type { Meta } from "@content-collections/core";
+import { z } from "zod";
 
 export type SortOrder = "featured" | "top2" | "top3" | "other";
 
+export const ProjectMetadataSchema = z.object({
+  draft: z.boolean(),
+  sortOrder: z.enum(["featured", "top2", "top3", "other"]),
+  description: z.string(),
+  title: z.string(),
+  tech: z.array(z.string()),
+  repository: z.string().optional(),
+  url: z.string(),
+  publishDate: z.string(),
+  slug: z.string().optional(),
+  keywords: z.array(z.string()),
+});
+
+export type ProjectMeta = z.infer<typeof ProjectMetadataSchema>;
+
 export type Project = {
-  mdx: string;
-  slug: string;
   content: string;
-  title: string;
-  description: string;
-  keywords: string[];
-  tech: string[];
-  draft: boolean;
-  publishDate: string;
-  url?: string;
-  repository?: string;
-  sortOrder: SortOrder; // Always one of the defined SortOrder values
-  _meta: Meta;
-} 
+  meta: ProjectMeta;
+};

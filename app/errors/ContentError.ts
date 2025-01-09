@@ -1,10 +1,16 @@
 import CustomError from "./CustomErrorBase";
 
 type ErrorName =
-  | "UNABLE_TO_LOAD_PROJECTS"
   | "NO_PUBLISHED_PROJECTS"
-  | "PROJECT_NOT_FOUND"
-  | "ERROR_CATEGORIZING_PROJECTS";
+  | "MISSING_FIELD"
+  | "NO_METADATA"
+  | "INVALID_METADATA"
+  | "INVALID_FILE"
+  | "ERROR_CATEGORIZING_PROJECTS"
+  | "ERROR_LOADING_PROJECTS"
+  | "DIRECTORY_READ_ERROR"
+  | "MULTIPLE_PROJECT_ERRORS"
+  | "VALIDATION_ERROR";
 
 type ContentErrorProps = {
   name: ErrorName;

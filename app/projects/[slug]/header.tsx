@@ -8,25 +8,26 @@ import { FaGithub, FaTwitter } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight, HiOutlineEye } from "react-icons/hi";
 
 type Props = {
-  project: Pick<Project, "slug" | "title" | "description" | "url" | "repository" | "tech">;
+  project: Project;
   views: number;
 };
 
 export function Header({ project, views }: Props) {
+  const { meta } = project;
   const ref = useRef<HTMLElement>(null);
   const [isIntersecting, setIntersecting] = useState(true);
 
   const links: { label: string; href: string }[] = [];
-  if (project.repository) {
+  if (meta.repository) {
     links.push({
       label: "Github",
-      href: `https://github.com/${project.repository}`,
+      href: `https://github.com/${meta.repository}`,
     });
   }
-  if (project.url) {
+  if (meta.url) {
     links.push({
       label: "Website",
-      href: project.url,
+      href: meta.url,
     });
   }
   useEffect(() => {
@@ -42,7 +43,8 @@ export function Header({ project, views }: Props) {
   return (
     <header ref={ref} className="bg-gradient-to-tl from-black via-slate-900 to-black">
       <div
-        className={`transition-heading fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
+        style={{ viewTimelineName: "heading" }}
+        className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
           isIntersecting
             ? "bg-slate-800/0 border-transparent"
             : "bg-white/10  border-slate-200 lg:border-transparent"
@@ -99,13 +101,13 @@ export function Header({ project, views }: Props) {
         <div className="flex flex-col max-w-[80ch]  lg:mx-0">
           <div className="text-center">
             <h2 className="fluid-5xl font-bold tracking-tight text-white font-display">
-              {project.title}
+              {meta.title}
             </h2>
-            <p className="fluid-base mt-4 text-slate-300">{project.description}</p>
+            <p className="fluid-base mt-4 text-slate-300">{meta.description}</p>
           </div>
 
           <div className="mt-6 mx-auto">
-            <TechList techUsed={project.tech} className="text-slate-300" />
+            <TechList techUsed={meta.tech} className="text-slate-300" />
           </div>
 
           <div className="mt-10 max-w-2xl g:mx-0 lg:max-w-none">

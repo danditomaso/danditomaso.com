@@ -1,42 +1,38 @@
 import Link from "@/app/components/link";
-import { HiOutlineEye } from "react-icons/hi";
+import type { Project } from "@/entities/project";
 import { TechList } from "../components/tech-list";
-import { Project } from "@/entities/project";
+import { TimeDisplay } from "../components/time";
 
 type Props = {
   project: Project;
   views: number;
 };
 
-export function Article({ project, views }: Props) {
+export function Article({ project }: Props) {
   if (!project) {
     return null;
   }
 
   return (
-    <Link href={`/projects/${project?.slug}`}>
+    <Link href={`/projects/${project?.meta.slug}`}>
       <article className="p-4 md:p-8">
         <div className="flex justify-between gap-3 items-center">
           <span className="text-xs duration-1000 text-slate-200 group-hover:text-white group-hover:border-slate-200">
-            <time dateTime={new Date(project.publishDate).toISOString()}>
-              {Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
-                new Date(project.publishDate),
-              )}
-            </time>
+            <TimeDisplay publishDate={project.meta?.publishDate} />
           </span>
-          <span className="text-slate-200 text-xs flex items-center gap-2">
+          {/* <span className="text-slate-200 text-xs flex items-center gap-2">
             <HiOutlineEye className="size-5" />{" "}
             {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
-          </span>
+          </span> */}
         </div>
         <h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-slate-200 group-hover:text-white font-display">
-          {project.title}
+          {project.meta.title}
         </h2>
         <p className="z-20 mt-4 text-sm  duration-1000 text-slate-400 group-hover:text-slate-200">
-          {project.description}
+          {project.meta.description}
         </p>
         <div className="mt-4">
-          <TechList techUsed={project.tech} />
+          <TechList techUsed={project.meta.tech} />
         </div>
       </article>
     </Link>

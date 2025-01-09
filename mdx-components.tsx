@@ -1,4 +1,4 @@
-import { useMDXComponent } from "@content-collections/mdx/react";
+import type { MDXComponents } from "mdx/types";
 import { Link } from "next-view-transitions";
 import React, { type ComponentPropsWithoutRef } from "react";
 
@@ -9,7 +9,7 @@ type ListItemProps = ComponentPropsWithoutRef<"li">;
 type AnchorProps = ComponentPropsWithoutRef<"a">;
 type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
 
-const components = {
+export const components = {
   h1: (props: HeadingProps) => (
     <h1 className="mt-10 fluid-3xl font-bold tracking-tighter font-display" {...props} />
   ),
@@ -85,17 +85,8 @@ const components = {
   ),
 };
 
-interface MDXProps {
-  code: string;
-}
-
-export function MDX({ code }: MDXProps) {
-  const Component = useMDXComponent(code);
-  return (
-    <Component
-      components={{
-        ...components,
-      }}
-    />
-  );
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+  };
 }
