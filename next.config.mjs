@@ -1,11 +1,10 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   pageExtensions: ["tsx", "mdx"],
   images: {
-    domains: ["danditomaso.com"],
+    domains: ["danditomaso.com", "http://localhost:3000"],
   },
   // redirect bots back to home page
   redirects: async () => {
