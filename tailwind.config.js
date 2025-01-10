@@ -18,11 +18,11 @@ module.exports = {
         "auto-fill": "repeat(auto-fill, minmax(150px, 1fr))",
       },
       animation: {
-        "fade-in": "fade-in 1.25s ease-in-out forwards",
-        "fade-out": "fade-out 1.25s ease-in-out forwards",
+        "fade-in": "fade-in .3s ease-in-out forwards",
+        "fade-out": "fade-out .3s ease-in-out forwards",
         title: "title 1s ease-out forwards",
-        "fade-left": "fade-left 1.25s ease-in-out forwards",
-        "fade-right": "fade-right 1.25s ease-in-out forwards",
+        "fade-left": "fade-left .3s ease-in-out forwards",
+        "fade-right": "fade-right .3s ease-in-out forwards",
       },
       keyframes: {
         "fade-in": {
