@@ -29,12 +29,12 @@ function Navigation() {
 function Header() {
   return (
     <header className="flex flex-col mt-[20%] my-6 lg:my-16 mx-16">
-      <h1 className="py-1 px-0.5 z-10 text-md tracking-[2px] uppercase font-light text-transparent duration-200 bg-white cursor-default animate-title font-sans whitespace-nowrap bg-clip-text">
+      <h1 className="py-1 px-0.5 z-10 fluid-xl tracking-[1.5px] font-bold text-transparent duration-200 bg-white cursor-default animate-fade-in whitespace-nowrap bg-clip-text">
         Dan Ditomaso
       </h1>
 
       <div className="animate-fade-in mt-3 tracking-widerest lg:max-w-[38ch] text-balance">
-        <h2 className="text-md tracking-wider text-white">Full Stack Developer</h2>
+        <h2 className="text-lg font-light tracking-wider text-white">Full Stack Developer</h2>
         <h3 className="text-md font-light leading-normal mt-4 text-slate-400 tracking-widest">
           I'm a full stack developer with a{" "}
           <Link href="/projects" className="underline">
