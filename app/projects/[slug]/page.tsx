@@ -52,9 +52,9 @@ export default async function PostPage(props: Props) {
   const _post = project.value;
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white">
       <Header project={_post} views={0} />
-      <article className="px-6 pt-14 mx-auto max-w-7xl lg:px-16 pb-12">
+      <article className="overflow-x-hidden mx-auto container relative lg:px-44 md:px-8 sm:px-4 py-4">
         <MDXRemote source={_post?.content} components={components} />
       </article>
     </div>

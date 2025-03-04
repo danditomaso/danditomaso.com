@@ -3,15 +3,13 @@ import { describe, expect, it } from "vitest";
 import { categorizeProjects } from "./projects";
 
 const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
-  mdx: "",
   content: "",
   description: "A test project",
   tech: ["TypeScript", "React"],
-  draft: false,
   keywords: ["test", "project"],
   publishDate: "2022-01-01",
-  url: "https://example.com",
-  repository: "https://example.com/repo",
+  website: "https://example.com",
+  github: "https://example.com/repo",
   _meta: {
     directory: "projects",
     extension: ".mdx",
@@ -22,7 +20,7 @@ const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {
 };
 
 function createProject(
-  slug: string,
+  url: string,
   title: string,
   sortOrder: SortOrder,
   publishDate = "2022-01-01",
@@ -30,7 +28,6 @@ function createProject(
 ): Project {
   return {
     ...baseProject,
-    slug,
     title,
     sortOrder,
     publishDate,
