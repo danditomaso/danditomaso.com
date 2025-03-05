@@ -41,7 +41,6 @@ export function categorizeProjects(projects: Project[]): Result<CategorizedProje
   };
 
   const sortedProjects = projects
-    .filter((p) => !p.meta.draft) // Include only projects in published state
     .sort((a, b) => {
       // Primary sort by sortOrder priority
       const priorityDiff =
