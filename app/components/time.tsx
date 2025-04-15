@@ -12,12 +12,12 @@ const formatPublishDate = (dateString: string): string => {
 
 // React component
 const TimeDisplay: React.FC<{ publishDate: string }> = ({ publishDate }) => {
-  if (publishDate === 'TBD') {
-    return <time>Release date: TBD</time>
+  if (publishDate === "TBD") {
+    return <time>Release date: TBD</time>;
   }
   return (
     <time dateTime={new Date(publishDate)?.toISOString()}>
-      Released: {formatPublishDate(publishDate) ?? 'TBD'}
+      Released: {formatPublishDate(publishDate) ?? "TBD"}
     </time>
   );
 };

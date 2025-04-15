@@ -2,7 +2,7 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
 
 const nextConfig = {
-  transpilePackages: ['next-mdx-remote'], // this is temporarily while they solve this issue https://github.com/vercel/next.js/issues/64525
+  transpilePackages: ["next-mdx-remote"], // this is temporarily while they solve this issue https://github.com/vercel/next.js/issues/64525
   pageExtensions: ["tsx", "mdx"],
   images: {
     domains: ["danditomaso.com", "http://localhost:3000"],
@@ -26,7 +26,8 @@ const nextConfig = {
         permanent: true,
       },
     ];
-  },};
+  },
+};
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",

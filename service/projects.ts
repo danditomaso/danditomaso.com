@@ -40,18 +40,17 @@ export function categorizeProjects(projects: Project[]): Result<CategorizedProje
     other: 4,
   };
 
-  const sortedProjects = projects
-    .sort((a, b) => {
-      // Primary sort by sortOrder priority
-      const priorityDiff =
-        priority[a.meta.sortOrder as SortOrder] - priority[b.meta.sortOrder as SortOrder];
-      if (priorityDiff !== 0) {
-        return priorityDiff;
-      }
+  const sortedProjects = projects.sort((a, b) => {
+    // Primary sort by sortOrder priority
+    const priorityDiff =
+      priority[a.meta.sortOrder as SortOrder] - priority[b.meta.sortOrder as SortOrder];
+    if (priorityDiff !== 0) {
+      return priorityDiff;
+    }
 
-      // Secondary sort by date (most recent first)
-      return new Date(b.meta.publishDate).getTime() - new Date(a.meta.publishDate).getTime();
-    });
+    // Secondary sort by date (most recent first)
+    return new Date(b.meta.publishDate).getTime() - new Date(a.meta.publishDate).getTime();
+  });
 
   if (sortedProjects.length === 0) {
     return err(

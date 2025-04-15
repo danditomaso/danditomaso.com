@@ -24,7 +24,6 @@ import {
   SiZod,
 } from "react-icons/si";
 
-
 export function TechList({ techUsed, className }: { techUsed: string[]; className?: string }) {
   if (!techUsed) {
     return null;

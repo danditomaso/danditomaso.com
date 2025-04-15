@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/util/style";
-import { motion, useMotionTemplate, useSpring } from "motion/react"
-
+import { motion, useMotionTemplate, useSpring } from "motion/react";
 
 export function Card({ children, className }: { children: React.ReactNode; className?: string }) {
   const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
