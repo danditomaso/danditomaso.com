@@ -5,12 +5,11 @@ import type { Project } from "@/entities/project";
 import { cn } from "@/util/style";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
-import { FaGithub, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 type Props = {
   project: Project;
-  views: number;
 };
 
 export function Header({ project }: Props) {
@@ -23,7 +22,9 @@ export function Header({ project }: Props) {
   if (meta?.github) {
     links?.push({
       label: "Github",
-      href: meta?.github?.includes('https://') ? meta?.github : `https://github.com/${meta?.github}`,
+      href: meta?.github?.includes("https://")
+        ? meta?.github
+        : `https://github.com/${meta?.github}`,
     });
   }
   if (meta?.website) {
@@ -47,26 +48,32 @@ export function Header({ project }: Props) {
     <header ref={ref} className="bg-gradient-to-tl from-black via-slate-900 to-black py-8">
       <div
         style={{ viewTimelineName: "heading" }}
-        className={cn("fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent", isIntersecting
-          ? "bg-slate-800/0 border-transparent"
-          : "bg-white/10  border-slate-200 lg:border-transparent"
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent",
+          isIntersecting
+            ? "bg-slate-800/0 border-transparent"
+            : "bg-white/10  border-slate-200 lg:border-transparent",
         )}
       >
         <div className="flex flex-row-reverse container items-center justify-between p-6 mx-auto">
           <div className="flex justify-between gap-8">
-            <Link href="https://twitter.com/danditomaso" target="_blank">
-              <FaTwitter
-                className={cn("size-6 duration-200 hover:font-medium", isIntersecting
-                  ? " text-slate-400 hover:text-slate-100"
-                  : "text-slate-600 hover:text-slate-900"
+            <Link href="https://www.linkedin.com/in/danielditomaso/" target="_blank">
+              <FaLinkedin
+                className={cn(
+                  "size-6 duration-200 hover:font-medium",
+                  isIntersecting
+                    ? " text-slate-400 hover:text-slate-100"
+                    : "text-slate-600 hover:text-slate-900",
                 )}
               />
             </Link>
             <Link href="https://github.com/danditomaso" target="_blank">
               <FaGithub
-                className={cn("size-6 duration-200 hover:font-medium", isIntersecting
-                  ? " text-slate-400 hover:text-slate-100"
-                  : "text-slate-600 hover:text-slate-900"
+                className={cn(
+                  "size-6 duration-200 hover:font-medium",
+                  isIntersecting
+                    ? " text-slate-400 hover:text-slate-100"
+                    : "text-slate-600 hover:text-slate-900",
                 )}
               />
             </Link>
@@ -74,9 +81,11 @@ export function Header({ project }: Props) {
 
           <Link
             href="/projects"
-            className={cn("duration-200 hover:font-medium", isIntersecting
-              ? " text-slate-400 hover:text-slate-100"
-              : "text-slate-600 hover:text-slate-900"
+            className={cn(
+              "duration-200 hover:font-medium",
+              isIntersecting
+                ? " text-slate-400 hover:text-slate-100"
+                : "text-slate-600 hover:text-slate-900",
             )}
           >
             <HiArrowLeft className="size-6" />
