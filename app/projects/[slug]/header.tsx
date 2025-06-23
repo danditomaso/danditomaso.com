@@ -45,11 +45,11 @@ export function Header({ project }: Props) {
   }, []);
 
   return (
-    <header ref={ref} className="bg-gradient-to-tl from-black via-slate-900 to-black py-8">
+    <header ref={ref} className="bg-linear-to-tl from-black via-slate-900 to-black py-8">
       <div
         style={{ viewTimelineName: "heading" }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent",
+          "fixed inset-x-0 top-0 z-50 backdrop-blur-sm lg:backdrop-blur-none duration-200 border-b lg:bg-transparent",
           isIntersecting
             ? "bg-slate-800/0 border-transparent"
             : "bg-white/10  border-slate-200 lg:border-transparent",

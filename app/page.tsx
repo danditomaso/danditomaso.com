@@ -49,7 +49,7 @@ function Header() {
 
 export default function Home() {
   return (
-    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center w-screen h-screen px-6 py-12 md:px-8 md:py-20 lg:px-24 lg:py-0 overflow-hidden bg-gradient-to-tl from-slate-900/95 via-slate-900/60 to-slate-900/30">
+    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center w-screen h-screen px-6 py-12 md:px-8 md:py-20 lg:px-24 lg:py-0 overflow-hidden bg-linear-to-tl from-slate-900/95 via-slate-900/60 to-slate-900/30">
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={1500}

@@ -26,7 +26,7 @@ export const components = {
     <h4 className="mt-8 text-xl font-semibold tracking-tight font-display" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="mt-4 text-slate-900 font-normal [&:not(:first-child)]:mt-6" {...props} />
+    <p className="mt-4 text-slate-900 font-normal not-first:mt-6" {...props} />
   ),
   ol: (props: ListProps) => <ol className="my-6 ml-6 list-decimal" {...props} />,
   ul: (props: ListProps) => <ul className="text-gray-800 list-disc pl-5 space-y-1" {...props} />,

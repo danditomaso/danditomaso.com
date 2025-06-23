@@ -21,7 +21,7 @@ export const Navigation: React.FC = () => {
   return (
     <header ref={ref}>
       <div
-        className={`fixed inset-x-0 top-0 z-50 backdrop-blur  duration-200 border-b  ${
+        className={`fixed inset-x-0 top-0 z-50 backdrop-blur-sm  duration-200 border-b  ${
           isIntersecting
             ? "bg-slate-900/0 border-transparent"
             : "bg-slate-900/500  border-slate-800 "

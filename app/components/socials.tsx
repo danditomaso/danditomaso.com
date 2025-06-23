@@ -39,7 +39,7 @@ export async function Socials() {
             target="_blank"
           >
             <span
-              className="absolute w-px h-2/3 bg-gradient-to-b from-slate-500 via-slate-500/50 to-transparent"
+              className="absolute w-px h-2/3 bg-linear-to-b from-slate-500 via-slate-500/50 to-transparent"
               aria-hidden="true"
             />
             <span className="relative z-10 flex items-center justify-center size-12 text-sm duration-1000 border rounded-full text-slate-200 group-hover:text-white group-hover:bg-slate-900 border-slate-500 bg-slate-900 group-hover:border-slate-200 drop-shadow-orange">
