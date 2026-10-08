@@ -1,8 +1,8 @@
 "use client";
-import Link from "@/app/components/link";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
+import Link from "@/app/components/link";
 
 export const Navigation: React.FC = () => {
   const ref = useRef<HTMLElement>(null);

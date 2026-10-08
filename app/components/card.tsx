@@ -1,6 +1,6 @@
 "use client";
-import { cn } from "@/util/style";
 import { motion, useMotionTemplate, useSpring } from "motion/react";
+import { cn } from "@/util/style";
 
 export function Card({ children, className }: { children: React.ReactNode; className?: string }) {
   const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
@@ -15,6 +15,7 @@ export function Card({ children, className }: { children: React.ReactNode; class
   const style = { maskImage, WebkitMaskImage: maskImage };
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: mouse tracking only drives a decorative spotlight
     <div
       onMouseMove={onMouseMove}
       className={cn(

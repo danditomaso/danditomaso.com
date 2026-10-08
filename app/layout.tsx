@@ -1,7 +1,7 @@
 import "../global.css";
-import { ViewTransitions } from "next-view-transitions";
 import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
+import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "./components/analytics/tracking";
 
 export const metadata = {
@@ -56,11 +56,7 @@ const calSans = LocalFont({
   variable: "--font-calsans",
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ViewTransitions>
       <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>

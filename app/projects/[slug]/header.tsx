@@ -1,12 +1,12 @@
 "use client";
-import Link from "@/app/components/link";
-import { TechList } from "@/app/components/tech-list";
-import type { Project } from "@/entities/project";
-import { cn } from "@/util/style";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
+import Link from "@/app/components/link";
+import { TechList } from "@/app/components/tech-list";
+import type { Project } from "@/entities/project";
+import { cn } from "@/util/style";
 
 type Props = {
   project: Project;

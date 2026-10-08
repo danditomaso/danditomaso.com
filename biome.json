@@ -1,12 +1,13 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
   "files": {
-    "maxSize": 1572864
+    "maxSize": 1572864,
+    "includes": ["**", "!**/public/vendor", "!**/*.css"]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "a11y": {
         "noSvgWithoutTitle": "off"
       },
@@ -26,24 +27,30 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noConsoleLog": "warn"
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": ["log"]
+          }
+        }
       },
       "complexity": {
         "noForEach": "off"
       }
     },
-    "ignore": [
-      ".vitest",
-      "node_modules",
-      ".next",
-      "dist",
-      ".nuxt",
-      ".wrangler",
-      ".react-email",
-      ".content-collections",
-      "analytics",
-      "*.test.{ts,tsx}",
-      "*.css"
+    "includes": [
+      "**",
+      "!**/.vitest",
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/.nuxt",
+      "!**/.wrangler",
+      "!**/.react-email",
+      "!**/.content-collections",
+      "!**/analytics",
+      "!**/*.test.{ts,tsx}",
+      "!**/*.css"
     ]
   },
   "formatter": {
@@ -51,20 +58,24 @@
     "indentWidth": 2,
     "enabled": true,
     "lineWidth": 100,
-    "ignore": [
-      "node_modules",
-      ".next",
-      "dist",
-      "*.test.{ts,tsx}",
-      ".nuxt",
-      ".wrangler",
-      ".react-email",
-      ".content-collections",
-      "*.css"
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/*.test.{ts,tsx}",
+      "!**/.nuxt",
+      "!**/.wrangler",
+      "!**/.react-email",
+      "!**/.content-collections",
+      "!**/*.css"
     ]
   },
-  "organizeImports": {
-    "enabled": true,
-    "ignore": ["node_modules", ".next", "dist", ".wrangler", ".react-email", ".content-collections"]
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   }
 }

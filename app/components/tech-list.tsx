@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/util/style";
 import {
   BiLogoFigma,
   BiLogoGraphql,
@@ -23,6 +22,7 @@ import {
   SiVercel,
   SiZod,
 } from "react-icons/si";
+import { cn } from "@/util/style";
 
 export function TechList({ techUsed, className }: { techUsed: string[]; className?: string }) {
   if (!techUsed) {

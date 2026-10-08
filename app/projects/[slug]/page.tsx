@@ -1,8 +1,8 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { components } from "@/mdx-components";
 import { getProjectBySlug, getProjectSlugs } from "@/service/projects";
-import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { notFound } from "next/navigation";
 import { Header } from "./header";
 
 type Props = {

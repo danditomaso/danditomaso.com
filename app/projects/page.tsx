@@ -1,6 +1,6 @@
-import { categorizeProjects, getAllProjects } from "@/service/projects";
 import type { Metadata } from "next";
 import React from "react";
+import { categorizeProjects, getAllProjects } from "@/service/projects";
 import { Card } from "../components/card";
 import { Navigation } from "../components/nav";
 import { ContentError } from "../errors";

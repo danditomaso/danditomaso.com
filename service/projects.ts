@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
-
+import { err, ok, type Result } from "neverthrow";
+import { z } from "zod";
 import { isResultError } from "@/app/errors/error_utils";
 import {
   type Project,
@@ -9,8 +10,6 @@ import {
   ProjectMetadataSchema,
   type SortOrder,
 } from "@/entities/project";
-import { type Result, err, ok } from "neverthrow";
-import { z } from "zod";
 import { ContentError } from "../app/errors";
 
 export interface CategorizedProjects {
