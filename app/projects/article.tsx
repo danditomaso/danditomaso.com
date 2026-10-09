@@ -1,7 +1,7 @@
+import { HiArrowRight } from "react-icons/hi";
 import Link from "@/app/components/link";
 import type { Project } from "@/entities/project";
 import { cn } from "@/util/style";
-import { HiArrowRight } from "react-icons/hi";
 import { TechList } from "../components/tech-list";
 import { TimeDisplay } from "../components/time";
 

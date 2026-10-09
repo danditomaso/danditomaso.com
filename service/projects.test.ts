@@ -1,5 +1,5 @@
-import type { Project, SortOrder } from "@/entities/project";
 import { describe, expect, it } from "vitest";
+import type { Project, SortOrder } from "@/entities/project";
 import { categorizeProjects } from "./projects";
 
 const baseProject: Omit<Project, "sortOrder" | "slug" | "title"> = {

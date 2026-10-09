@@ -1,6 +1,6 @@
-import { cn } from "@/util/style";
 import { Link } from "next-view-transitions";
 import type { ComponentPropsWithoutRef } from "react";
+import { cn } from "@/util/style";
 
 type LinkProps = {
   href: string;

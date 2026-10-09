@@ -1,5 +1,5 @@
-import Link from "@/app/components/link";
 import React from "react";
+import Link from "@/app/components/link";
 import Particles from "./components/particles";
 
 const navigation = [
